@@ -114,7 +114,7 @@ if (isset($_POST['submit']))
 </form>
 		</div>
 	</div>
-<p>Set up an account <a href="inputShopper.php"> here</a>.</p>
+<p>Set up an account <a href="inputUser.php"> here</a>.</p>
 	</body>
 
 </html>
