@@ -80,7 +80,7 @@ if (isset($_POST['submit']))
 			if (session_start())
 			{
 				$_SESSION['email']=$email;
-				header("Location: shopperhome.php");
+				header("Location: staffhome.php");
 				exit;
 			}
 			else{punt("Unable to start seesion when logged in.");}
