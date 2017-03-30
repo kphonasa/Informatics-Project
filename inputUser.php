@@ -154,7 +154,7 @@
 			if ($isComplete)
 			{
 				//check if there's a user with the same email
-				$query = "SELECT * FROM USERS WHERE EMAIL='" . $email . "';";
+				$query = "SELECT * FROM USERS1 WHERE EMAIL='" . $email . "';";
 				$result = queryDB($query, $db);
 				if(nTuples($result) == 0)
 				{
@@ -163,7 +163,7 @@
 					$hashedpass = crypt($password, getSalt());
 					
 					//put together sql code to isert tuple or record
-					$insert ="INSERT INTO USERS(EMAIL, HASHEDPASS,FNAME,LNAME,STREET,CITY,USSTATE,ZIP,PHONE,CARDNAME,CARDNUMBER,EXMONTH,EXYEAR,CCV) VALUES ('" . $email . "', '" . $hashedpass . "','" . $fname . "','" . $lname . "','" . $street . "','" . $city . "','" . $state . "','" . $zip . "','" . $phone . "','" . $cardname . "','" . $cardnumber . "','" . $exmonth . "','" . $exyear . "','" . $ccv . "');";
+					$insert ="INSERT INTO USERS1(EMAIL, HASHEDPASS,FNAME,LNAME,STREET,CITY,USSTATE,ZIP,PHONE,CARDNAME,CARDNUMBER,EXMONTH,EXYEAR,CCV) VALUES ('" . $email . "', '" . $hashedpass . "','" . $fname . "','" . $lname . "','" . $street . "','" . $city . "','" . $state . "','" . $zip . "','" . $phone . "','" . $cardname . "','" . $cardnumber . "','" . $exmonth . "','" . $exyear . "','" . $ccv . "');";
 					
 					//run insert
 					$result = queryDB($insert, $db);
