@@ -27,12 +27,14 @@
 			<h1>Enter Staff Members</h1>
 		</div>
 	</div>
-	
+
 	<!---Processing form input--->
 	<div class="row">
 		<div class="col-xs-12">
 		
 	<?php
+	
+	
 		if (isset($_POST['submit'])) 
 		{
 			//only run if the form was submitted
@@ -44,6 +46,8 @@
 			$admin =$_POST['admin'];
 			
 			
+			print("Hello World");
+	
 			//connect to database
 			$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 			
@@ -51,6 +55,8 @@
 			$isComplete = true;
 			$errorMessage="";
 			
+			print("Hello World");
+	
 			if (!$storeid)
 			{
 				$errorMessage .= "Please enter the storeid.";
@@ -88,7 +94,7 @@
 			}
 			
 			if ($isComplete)
-			{
+			{	
 				//check if there's a user with the same email
 				$query = "SELECT * FROM STAFF WHERE EMAIL='" . $email . "';";
 				$result = queryDB($query, $db);
@@ -129,7 +135,7 @@
 		?>
 		</div>
 	</div>
-	
+
 	<!--form for inputting data-->
 	<div class="row">
 		<div class="col-xs-12">

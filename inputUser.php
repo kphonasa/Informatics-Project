@@ -121,36 +121,7 @@
 				$isComplete = false;
 			}
 			
-			if (!$cardname)
-			{
-				$errorMessage .="Please enter the name on your card.";
-				$isComplete = false;
-			}
-			
-			if (!$cardnumber)
-			{
-				$errorMessage .="Please enter your card number";
-				$isComplete = false;
-			}
-			
-			if (!$exmonth)
-			{
-				$errorMessage .="Please enter the expiration month of your card.";
-				$isComplete = false;
-			}
-			
-			if (!$exyear)
-			{
-				$errorMessage .="Please enter the expiration year of your card.";
-				$isComplete = false;
-			}
-			
-			if (!$ccv)
-			{
-				$errorMessage .="Please enter the CCV of your card.";
-				$isComplete = false;
-			}
-			
+
 			if ($isComplete)
 			{
 				//check if there's a user with the same email

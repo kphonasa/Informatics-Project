@@ -65,7 +65,7 @@ if (isset($_POST['submit']))
 	}
 
 	//get the hashed password from the user with the email that got entered
-	$query="SELECT HASHEDPASS FROM USERS WHERE EMAIL='" . $email . "';";
+	$query="SELECT HASHEDPASS FROM USERS1 WHERE EMAIL='" . $email . "';";
 	$result=queryDB($query, $db);
 	if (nTuples($result)>0)
 	{
