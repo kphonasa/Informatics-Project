@@ -141,6 +141,12 @@
 	<div class="form-group">
 		<label for="password2">Enter password again</label>
 		<input type="password" class="form-control" name="password2"/>
+	</div><
+	
+	<div class="form-group">
+		<label for="admin">Is this staff member an admin?</label>
+			<input type="radio" name="admin" value="FALSE" checked> No<br>
+			<input type="radio" name="admin" value="TRUE"> Yes<br>
 	</div>
 	
 	<button type ="submit" class="btn btn-default" name="submit">Add</button>
