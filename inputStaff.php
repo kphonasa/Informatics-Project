@@ -6,7 +6,7 @@
 <html>
 	<head>
 	
-	<title>Enter Users</title>
+	<title>Enter Staff</title>
 		<neta name="viewport" content="width=device-widthe, initial-scale-1.0">
 	
 		<!-- Latest compiled and minified CSS -->
@@ -37,10 +37,12 @@
 		{
 			//only run if the form was submitted
 			//get data from form
+			$storeid=$_POST['storeid'];
 			$email = $_POST['email'];
 			$password = $_POST['password'];
 			$password2 = $_POST['password2'];
 			$admin =$_POST['admin'];
+			
 			
 			//connect to database
 			$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -49,6 +51,11 @@
 			$isComplete = true;
 			$errorMessage="";
 			
+			if (!$storeid)
+			{
+				$errorMessage .= "Please enter the storeid.";
+				$isComplete = false;
+			} 
 			if (!$email)
 			{
 				$errorMessage .= "Please enter an email.";
@@ -76,14 +83,14 @@
 			
 			if (!$admin)
 			{
-				$errorMessage .="Please choose if this staff member has admin priva.";
+				$errorMessage .="Please choose if this staff member is an admin.";
 				$isComplete=false;
 			}
 			
 			if ($isComplete)
 			{
 				//check if there's a user with the same email
-				$query = "SELECT * FROM USERS WHERE EMAIL='" . $email . "';";
+				$query = "SELECT * FROM STAFF WHERE EMAIL='" . $email . "';";
 				$result = queryDB($query, $db);
 				if(nTuples($result) == 0)
 				{
@@ -92,7 +99,7 @@
 					$hashedpass = crypt($password, getSalt());
 					
 					//put together sql code to isert tuple or record
-					$insert ="INSERT INTO USERS(EMAIL, HASHEDPASS,ISADMIN) VALUES ('" . $email . "', '" . $hashedpass . "','" . $admin . "');";
+					$insert ="INSERT INTO STAFF(STOREID, EMAIL, HASHEDPASS,ISADMIN) VALUES ('" . $storeid . "','" . $email . "', '" . $hashedpass . "','" . $admin . "');";
 					
 					//run insert
 					$result = queryDB($insert, $db);
@@ -127,7 +134,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 		
-<form action = "inputUser.php" method="post">
+<form action = "inputStaff.php" method="post">
 	<div class ="form-group">
 		<label for="email">Email</label>
 		<input type="email" class="form-control" name="email"/>
@@ -144,9 +151,16 @@
 	</div>
 	
 	<div class="form-group">
-		<label for="admin">Is this staff member an admin?</label>
-		<input type="radio" name="admin" value="FALSE"> No<br>
-		<input type="radio" name="admin" value="TRUE"> Yes<br>
+		<label for="storeid">Enter store ID</label>
+		<input type="text" class="form-control" name="storeid"/>
+	</div>
+	
+	<div class="form-group"> 
+		<label for="admin" class="control-label">Is this staff member an admin?</label>
+		<select class="form-control" name="admin">
+			<option value="false">No</option>
+			<option value="true">Yes</option>
+		</select>
 	</div>
 	
 	<button type ="submit" class="btn btn-default" name="submit">Add</button>

@@ -1,6 +1,6 @@
 <?php
 	//log user out by unsetting session variable called email and destroying the session
-	
+	$menuActive==5;
 	session_start();
 	if (isset($_SESSION['email']))
 	{

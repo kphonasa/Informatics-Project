@@ -115,6 +115,8 @@ if (isset($_POST['submit']))
 		</div>
 	</div>
 <p>Set up an account <a href="inputStaff.php"> here</a>.</p>
+<p>Temporary bypass <a href="staffhome.php"> here</a>.</p>
+
 	</body>
 
 </html>

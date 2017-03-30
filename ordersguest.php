@@ -1,12 +1,12 @@
-<!--staff home-->
+<!--orders-->
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
 
-	$title ="Home";
-	$h1 = "Home";
-	$menuActive=0;
-	include_once("staffHeader.php");
+	$title ="Orders";
+	$h1 = "Orders";
+	$menuActive=3;
+	include_once("guestheader.php");
 ?>
 <?php
 	include_once("footer.php");

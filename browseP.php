@@ -1,11 +1,11 @@
-<!--shopper home-->
+<!--browse products-->
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
 
-	$title ="Home";
-	$h1 = "Home";
-	$menuActive=0;
+	$title ="Products";
+	$h1 = "Products";
+	$menuActive=1;
 	include_once("shopperheader.php");
 ?>
 <?php
