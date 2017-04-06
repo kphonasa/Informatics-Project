@@ -126,8 +126,17 @@
 <form action="manageC.php" method="post">
 <!--name-->
 <div class="form-group">
-    <label for="STOREID">Storeid:</label>
-    <input type="text" class="form-control" name="STOREID" value="<?php if($storeid){echo $storeid; } ?>"/>
+	<label for="STOREID">Storeid:</label>
+	<select class="form-control" style="width: 500" name="STOREID">
+		<?php $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+		//run the query
+	
+		$query="SELECT ID FROM STORE;";
+		$result= queryDB($query, $db);
+			
+		while($row = nextTuple($result))
+		{ echo'<option value=' . $row['ID'] . '>';echo($row['ID']); echo'</option>';}?>
+	</select>
 </div>
 
 <!--country-->
