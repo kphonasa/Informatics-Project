@@ -101,12 +101,12 @@ if (isset($_POST['submit']))
 <form action="stafflogin.php" method="post">
 	<div class="form-group">
 		<label for="email">Email</label>
-		<input type="email" class="form-control" name="email"/>
+		<input type="email" style="width: 500" class="form-control" name="email"/>
 	</div>
 	
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="password" class="form-control" name="password"/>
+		<input type="password" style="width: 500" class="form-control" name="password"/>
 	</div>
 	
 	<button type="submit" class="btn btn-default" name="submit">Login</button>
@@ -115,7 +115,7 @@ if (isset($_POST['submit']))
 		</div>
 	</div>
 <p>Set up an account <a href="inputStaff.php"> here</a>.</p>
-<p>Temporary bypass <a href="staffhome.php"> here</a>.</p>
+
 
 	</body>
 

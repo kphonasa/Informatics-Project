@@ -2,11 +2,10 @@
 <?php
 // this kicks users out if they are not logged in
     session_start();
-    if (!isset($_SESSION['EMAIL'])) {
+    if (!isset($_SESSION['email'])) {
         header('Location: stafflogin.php');
         exit;
     }
-
 ?>
 
 <html>
@@ -29,7 +28,6 @@
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
-
 	$title ="Home";
 	$h1 = "Home";
 	$menuActive=0;

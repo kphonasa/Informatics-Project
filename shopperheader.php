@@ -16,7 +16,7 @@
 </head>
 
 
-    <div class="container">
+<body style="background-color:#84e184;">
 		<!--Container for all content to be displayed-->
 		<div class="row">
 			<div class="col-xs-12">
@@ -44,3 +44,4 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-xs-12" id="page">

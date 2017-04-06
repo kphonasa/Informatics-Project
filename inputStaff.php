@@ -143,27 +143,27 @@
 <form action = "inputStaff.php" method="post">
 	<div class ="form-group">
 		<label for="email">Email</label>
-		<input type="email" class="form-control" name="email"/>
+		<input type="email" class="form-control" style="width: 500" name="email"/>
 	</div>
 	
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="password" class="form-control" name="password"/>
+		<input type="password" class="form-control" style="width: 500" name="password"/>
 	</div>
 	
 	<div class="form-group">
 		<label for="password2">Enter password again</label>
-		<input type="password" class="form-control" name="password2"/>
+		<input type="password" class="form-control" style="width: 500" name="password2"/>
 	</div>
 	
 	<div class="form-group">
 		<label for="storeid">Enter store ID</label>
-		<input type="text" class="form-control" name="storeid"/>
+		<input type="text" class="form-control" style="width: 500" name="storeid"/>
 	</div>
 	
 	<div class="form-group"> 
 		<label for="admin" class="control-label">Is this staff member an admin?</label>
-		<select class="form-control" name="admin">
+		<select class="form-control" style="width: 100" name="admin">
 			<option value="false">No</option>
 			<option value="true">Yes</option>
 		</select>
