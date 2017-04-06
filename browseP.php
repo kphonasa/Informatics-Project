@@ -24,13 +24,19 @@
 <form action = "browseP.php" method="post">
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
 			<option selected disabled hidden>Order By:</option>
-			<option value="SELECT IMAGE,PNAME,PRICE FROM PRODUCT ORDER BY PNAME ASC;">A-Z</option>
-			<option value="SELECT IMAGE,PNAME,PRICE FROM PRODUCT ORDER BY PNAME DESC;">Z-A</option>
+			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">A-Z</option>
+			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME DESC;">Z-A</option>
+			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">Category</option>
 	</select><button type ="submit" class="btn btn-default" name="submit">Go</button>
 </form>
 	<table class='table table-hover'>
 
-
+		<thead>
+			<th></th>
+			<th>Product</th>
+			<th>Category</th>
+			<th>Price</th>
+		</thead>
 		<!--include config and util files-->
 		<?php
 
@@ -40,7 +46,7 @@
 
 		if (isset($_POST['submit']))
 		{$query = $_POST['order'];}
-		else{$query ="SELECT IMAGE,PNAME,PRICE FROM PRODUCT ORDER BY PNAME ASC;";}
+		else{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;";}
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
@@ -53,6 +59,7 @@
 			echo "<img src='$imagelocation' width='150' alt=$altText'>";}
 			echo'</td>';
 			echo '<td>' . $row['PNAME'] . '</td>';
+			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
 			echo'</tr>';
 		}

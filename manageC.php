@@ -158,32 +158,33 @@
 
 
 <!--show manufactuere-->
-<div class="row">
-    <div class="col-xs-12">
-        
-<table class="table table hover">
-    <thead>
-        <th>Name</th>        
-    </thead>
-    
-<?php
-    include_once('config.php');
-    include_once('dbutils.php');
-    
-    $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-    
-    $query= 'SELECT CNAME FROM STAFF,CATEGORY WHERE STAFF.STOREID=CATEGORY.STOREID;';
-    
-    $result= queryDB($query,$db);
-    
-    while($row = nextTuple($result)) {
-        echo "\n <tr>";
-        echo "<td>" . $row['CNAME'] . "</td>";
-        echo "<tr> \n";
-    }
-?>       
-    
-</table>
+	<table class='table table-hover'>
+
+
+		<!--include config and util files-->
+		<?php
+
+		//connect to the database
+		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+
+		//Set up the query to get information on the cars from the database
+		
+		
+		//run the query
+
+		if (isset($_POST['submit']))
+		{$query = $_POST['order'];}
+		else{$query ="SELECT CNAME FROM CATEGORY ORDER BY CNAME ASC;";}
+		$result= queryDB($query, $db);
+				
+		while($row = nextTuple($result))
+		{
+			echo'<tr>';
+			echo '<td>' . $row['CNAME'] . '</td>';
+			echo'</tr>';
+		}
+		?>
+	</table>
 
     </div>
 </div>

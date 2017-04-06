@@ -9,20 +9,7 @@
     }
 ?>
 
-<html>
-    <head>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        
-
-        <title>Product</title>
-    </head>
     <body>
 <?php
 	include_once('config.php');
@@ -36,10 +23,11 @@
     //if we are here, it means that the form was submitted and we need to process form data
     
     //get data from form
-    $storeid=$_POST['CATEGORY-STOREID'];
-	$storeid2=$_POST['STOREID'];
+	$storeid=$_POST['STOREID'];
 	$pname=$_POST['PNAME'];
     $description=$_POST['DESCRIPTION'];
+	$image=$_POST['IMAGE'];
+	$category=$_POST['CATEGORY'];
     $price=$_POST['PRICE'];
     $qty=$_POST['QTY'];
     
@@ -50,15 +38,15 @@
     $errorMessage="";
     
     if(!isset($storeid)){
-        $errorMessage .= "Please enter maker.\n";
-        $isComplete =false;
-    }
-	if(!isset($storeid2)){
-        $errorMessage .= "Please enter storeid.\n";
+        $errorMessage .= "Please select the store.\n";
         $isComplete =false;
     }
      if(!isset($pname)){
         $errorMessage .= "Please enter name.\n";
+        $isComplete =false;
+    }
+		if(!isset($category)){
+        $errorMessage .= "Please select the category.\n";
         $isComplete =false;
     }
     
@@ -80,7 +68,7 @@
     
     
     //put together SQL to insert new record
-    $query="INSERT INTO PRODUCT(STOREID,PNAME,DESCRIPTION,PRICE,QTY) VALUES ('$storeid','$pname','$description','$price','$qty');";
+    $query="INSERT INTO PRODUCT(STOREID,PNAME,DESCRIPTION,CATEGORY,PRICE,QTY) VALUES ('" . $storeid . "','" . $pname . "','" . $pname . "','" . $description . "','" . $category . "','" . $qty . "','" . $category . "');";
     
     //get a handle to database
      $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -151,46 +139,60 @@
 
 <form action="manageP.php" method="post">
 <!--maker-->
-<div class="form-group">
-    <label for="CATEGORY.STOREID">Category:</label>
-    <?php
-        //connect to the database
-        if(!isset($db)){
-            $db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-        }
-        echo (generateDropdown($db,"CATEGORY","CNAME","STOREID",$storeid));
-    ?>
-</div>
+
 <div class="form-group">
     <label for="STOREID">Storeid:</label>
-    <input type="text" class="form-control" name="STOREID" value="<?php if($storeid2){echo $storeid2; } ?>"/>
+	<select class="form-control" style="width: 100" name="STOREID">
+		<?php $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+		//run the query
+	
+		$query="SELECT ID FROM STORE;";
+		$result= queryDB($query, $db);
+			
+		while($row = nextTuple($result))
+		{ echo'<option value=' . $row['ID'] . '>';echo($row['ID']); echo'</option>';}?>
+	</select>
+</div>
+<div class="form-group">
+    <label for="CATEGORY">Category:</label>
+        <select class="form-control" style="width: 500" name="STOREID">
+		<?php $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+		//run the query
+	
+		$query="SELECT CNAME,ID FROM CATEGORY;";
+		$result= queryDB($query, $db);
+			
+		while($row = nextTuple($result))
+		{ echo'<option value=' . $row['ID'] . '>';echo($row['CNAME']); echo'</option>';}?>
+	</select>
+    
 </div>
 <!--name-->
 <div class="form-group">
     <label for="PNAME">Name:</label>
-    <input type="text" class="form-control" name="PNAME" value="<?php if($pname){echo $pname; } ?>"/>
+    <input type="text" class="form-control" name="PNAME"style="width: 500" value="<?php if($pname){echo $pname; } ?>"/>
 </div>
 
-<!--year-->
+
 <div class="form-group">
     <label for="DESCRIPTION">Description:</label>
-    <input type="text" class="form-control" name="DESCRIPTION" value="<?php if($description){echo $description; } ?>"/>
+    <input type="text" class="form-control" name="DESCRIPTION"/>
 </div>
-<!--trim-->
 
 <div class="form-group">
     <label for="PRICE">Price:</label>
-    <input type="text" class="form-control" name="PRICE" value="<?php if($price){echo $price; } ?>"/>
+    <input type="text" style="width: 500" class="form-control" name="PRICE"/>
 </div>
-<!--URL--> 
+
+
  <div class="form-group">
     <label for="QTY">QTY:</label>
-    <input type="text" class="form-control" name="QTY" value="<?php if($qty){echo $qty; } ?>"/>
+    <input type="text" style="width: 500" class="form-control" name="QTY"/>
 </div>
  
  <div class="form-group">
-    <label for="picture">Picture of product</label>
-    <input type="file" class="form-control" name="picture"/>
+    <label for="IMAGE">Picture of product</label>
+    <input type="file" style="width: 500" class="form-control" name="IMAGE"/>
 </div>
  
 <button type="submit" class="btn-btn-default" name="submit">Save</button>
@@ -203,13 +205,14 @@
 <div class="row">
     <div class="col-xs-12">
         
-<table class="table table hover">
+<table class='table table-hover'>
     <thead>
-        <th>Category</th>
         <th>Name</th>
         <th>Description</th>
+		<th>Category</th>
         <th>Price</th>
         <th>Qty</th>
+		<th>Image</th>
     </thead>
     
 <?php
@@ -218,15 +221,15 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= 'SELECT PNAME,DESCRIPTION,PRICE,QTY,CATEGORY.CNAME as category FROM CATEGORY,PRODUCT WHERE CATEGORY.STOREID=PRODUCT.STOREID;';
+    $query= "SELECT PNAME,DESCRIPTION,CATEGORY, PRICE, QTY, IMAGE FROM PRODUCT;";
     
     $result= queryDB($query,$db);
     
     while($row = nextTuple($result)) {
         echo "\n <tr>";
-        echo "<td>" . $row['category'] . "</td>";
         echo "<td>" . $row['PNAME'] . "</td>";
         echo "<td>" . $row['DESCRIPTION'] . "</td>";
+		echo "<td>" . $row['CATEGORY'] . "</td>";
         echo "<td>" . $row['PRICE'] . "</td>";
         echo "<td>" . $row['QTY'] . "</td>";
 		echo "<td>";
@@ -245,11 +248,6 @@
 </table>
 
     </div>
-</div>
-
-    </body>
-</html>
-
 
 
 
