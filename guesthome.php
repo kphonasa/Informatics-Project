@@ -8,6 +8,20 @@
 	$menuActive=0;
 	include_once("guestheader.php");
 ?>
+
+<html>
+	<body>
+		<p>
+			Welcome to our store
+		</p>
+	</body>
+</html>
+
+
+
+
+
+
 <?php
 	include_once("footer.php");
 ?>

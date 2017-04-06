@@ -37,7 +37,7 @@
 						<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
 						<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
 						<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
-						<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="shopperlogin.php">Sign In</a></li>
+						<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUsers.php">Register</a></li>
 					</ul>
 					</div>
 				</div>

@@ -1,51 +1,78 @@
-<!--browse categories-->
+<!--browse category-->
+<html>
+
+<!-- Boostrap link -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <?php
-	include_once('config.php');
-	include_once('dbutils.php');
+include_once('config.php');
+include_once('dbutils.php');
 
-	$title ="Categories";
-	$h1 = "Categories";
-	$menuActive=2;
-	include_once("guestheader.php");
+$title ="Category";
+$h1 = "Category";
+$menuActive=2;
+include_once("guestheader.php");
 ?>
-<div class="col-xs-6">
-		<div class="col-xs-12">
-			<div id="container">
-		
-<form action = "browseC.php" method="post">
-	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
-			<option selected disabled hidden>Order By:</option>
-			<option value="SELECT CNAME FROM CATEGORY ORDER BY CNAME ASC;">A-Z</option>
-			<option value="SELECT CNAME FROM CATEGORY ORDER BY CNAME DESC;">Z-A</option>
-	</select><button type ="submit" class="btn btn-default" name="submit">Go</button>
-</form>
-	<table class='table table-hover'>
+	<body>
+<!-- Browse Product -->
 
 
-		<!--include config and util files-->
-		<?php
+<div class='row'>
+    <div class="col-sm-9 col-xs-12">
+        <p>
+            <h1>Category Information</h1>
+        </p>
+    </div>
+</div>
 
-		//connect to the database
-		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 
-		//Set up the query to get information on the cars from the database
-		
-		
-		//run the query
+<!-- Content table here -->
+    <div class='row'>
+            <div class='col-xs-12'>
+<table class='table table-hover'>
+    <!-- header for the table -->
+    <thead>
+        <th>Name</th>
+    </thead>
 
-		if (isset($_POST['submit']))
-		{$query = $_POST['order'];}
-		else{$query ="SELECT CNAME FROM CATEGORY ORDER BY CNAME ASC;";}
-		$result= queryDB($query, $db);
-				
-		while($row = nextTuple($result))
-		{
-			echo'<tr>';
-			echo '<td>' . $row['CNAME'] . '</td>';
-			echo'</tr>';
-		}
-		?>
-	</table>
 <?php
-	include_once("footer.php");
+    /*
+     *List all Productes that are in the DB
+     *
+     */
+    //include config and utils files
+    include_once('config.php');
+    include_once('dbutils.php');
+    
+    // connect to the DB
+    $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
+    
+    // set up a query to get infor on the cars from the DB
+    $query = 'SELECT CATEGORY.NAME as Name FROM CATEGORY;';
+    
+    // run the query
+    $result = queryDB($query, $db);
+    
+    while($row = nextTuple($result)) {
+        echo "\n <tr>";
+        echo "<td>" .$row['Name'] . "</td>";
+        echo "</tr> \n";
+    }
 ?>
+</table>	
+	
+	
+
+<?php
+	include_once('footer.php');
+?>
+
+	</body>
+</html>
