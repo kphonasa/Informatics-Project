@@ -44,7 +44,7 @@
 		$email=($_SESSION['email']);
 		$email=makeStringSafe($db,$email);
 		//Set up the query to get information on the cars from the database
-		$query = "SELECT FNAME,LNAME,STREET,CITY,USSTATE,ZIP,PHONE,CARDNAME,CARDNUMBER,EXMONTH,EXYEAR,CCV 
+		$query = "SELECT ID,FNAME,LNAME,STREET,CITY,USSTATE,ZIP,PHONE,CARDNAME,CARDNUMBER,EXMONTH,EXYEAR,CCV 
 		FROM USERS1 WHERE EMAIL = '" . $email . "';";
 		
 		//run the query
@@ -65,6 +65,8 @@
 			echo '<td>' . $row['EXMONTH'] . '</td>';
 			echo '<td>' . $row['EXYEAR'] . '</td>';
 			echo '<td>' . $row['CCV'] . '</td>';
+
+			echo "<td><a href='updateprofile.php?ID=" . $row['ID']  .  "'>edit</a></td>";
 			echo'</tr>';
 		}
 		?>
