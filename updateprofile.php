@@ -20,7 +20,7 @@
         // process the update if the form was submitted
         
         // get data from form
-        $id = $_GET['USERS1-ID'];
+        $id = $_POST['ID'];
         if (!isset($id)) {
             // if for some reason the id didn't post, kick them back to pizza.php
             header('Location: profile.php');
@@ -92,7 +92,7 @@
             // first update pizza record
             //
             // put together SQL statement to update pizza
-            $query = "UPDATE USERS1 SET FNAME=$firstname, LNAME=$lastname, STREET=$street, CITY=$city, USSTATE=$state, ZIP='$zip', PHONE='$phonenumber', CARDNAME=$cardname, CARDNUMBER=$cardnumber, EXMONTH=$xm, EXYEAR=$xy, CCV=$ccv  WHERE ID=$id;";
+            $query = "UPDATE USERS1 SET FNAME='$firstname', LNAME='$lastname', STREET='$street', CITY='$city', USSTATE='$state', ZIP='$zip', PHONE='$phonenumber', CARDNAME='$cardname', CARDNUMBER=$cardnumber, EXMONTH=$xm, EXYEAR=$xy, CCV=$ccv  WHERE ID=$id;";
             
             // connect to the database
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
@@ -118,7 +118,7 @@
          * Check if a GET variable was passed with the id for the pizza
          *
          */
-        if(!isset($_GET['ID'])) {
+         if(!isset($_GET['ID'])) {
             // if the id was not passed through the url
             
             // send them out to pizza.php and stop executing code in this page
@@ -134,8 +134,9 @@
         $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
         
         // set up a query
+        
         $id = $_GET['ID'];
-        $query = "SELECT * FROM USERS1 WHERE ID='" . $id . "';";
+        $query = "SELECT * FROM USERS1 WHERE ID=$id;";
         
         // run the query
         $result = queryDB($query, $db);
