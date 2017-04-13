@@ -38,7 +38,8 @@
 						<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseC.php">Browse Categories</a></li>
 						<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="orders.php">Orders</a></li>
 						<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="profile.php">Profile</a></li>
-						<li <?php if($menuActive==5){echo 'class="active"';}?>><a href="shopperlogout.php">Logout</a></li>
+						<li <?php if($menuActive==5){echo 'class="active"';}?>><a href="cart.php">Shopping Cart</a></li>
+						<li <?php if($menuActive==6){echo 'class="active"';}?>><a href="shopperlogout.php">Logout</a></li>
 					</ul>
 					</div>
 				</div>
