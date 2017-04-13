@@ -53,7 +53,7 @@
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
 		else if (isset($_POST['search']))
-		{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '" . $_POST['search'] . "';";}
+		{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '%" . $_POST['name'] . "%';";}
 		else{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;";}
 		$result= queryDB($query, $db);
 				
