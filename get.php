@@ -20,8 +20,34 @@ include_once('dbutils.php');
 include_once("guestheader.php");
 ?>
 
-<?php
+	<body>
+<!-- Browse Product -->
 
+
+<div class='row'>
+    <div class="col-sm-9 col-xs-12">
+        <p>
+            <h1>Product Information</h1>
+        </p>
+    </div>
+</div>
+
+
+<!-- Content table here -->
+    <div class='row'>
+            <div class='col-xs-12'>
+<table class='table table-hover'>
+    <!-- header for the table -->
+    <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>QTY</th>
+    </thead>
+
+
+<?php
 
 //include config and utils files
 include_once('config.php');
@@ -40,12 +66,16 @@ if (isset($_GET['srch-term'])) {
 	while($row = nextTuple($result)) {
 	echo "\n <tr>";
 	echo "<td>" .$row['PNAME'] . "</td>";
+	echo "<td>" .$row['DESCRIPTION'] . "</td>";
+	echo "<td>" .$row['CATEGORY'] . "</td>";
+	echo "<td>" .$row['PRICE'] . "</td>";
+	echo "<td>" .$row['QTY'] . "</td>";
 	echo "</tr> \n";
 	}
-
-
-
 ?>
+
+</table>
+
 
 <?php
 	include_once('footer.php');
