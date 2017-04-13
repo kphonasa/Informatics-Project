@@ -34,9 +34,7 @@
 		$email=($_SESSION['email']);
 		$email=makeStringSafe($db,$email);
 
-		$query="(SELECT ORDERS.ID, ORDERS.ORDERDATE, ORDERS.STATUS FROM ORDERS INNER JOIN USERS1 ON ORDERS.USERID=USERS1.ID WHERE USERS1.EMAIL='" . $email . "'); 
-		IF (SELECT COUNT FROM ORDERS INNER JOIN USERS1 ON ORDERS.USERID=USERS1.ID WHERE USERS1.EMAIL='" . $email . "') =0
-		BEGIN PRINT 'You have no orders currently' END";
+		$query="(SELECT ORDERS.ID, ORDERS.ORDERDATE, ORDERS.STATUS FROM ORDERS INNER JOIN USERS1 ON ORDERS.USERID=USERS1.ID WHERE USERS1.EMAIL='" . $email . "');";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))

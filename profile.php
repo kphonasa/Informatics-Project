@@ -19,58 +19,172 @@
 ?>
 <div class='row'>
 		<div class='col-sm-8'>
-	<table class='table table-hover'>
-		<!--table headers-->
-		<thead>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Street</th>
-			<th>City</th>
-			<th>State</th>
-			<th>Zip</th>
-			<th>Phone Number</th>
-			<th>Name on Card</th>
-			<th>Card Number</th>
-			<th>Expiration Month</th>
-			<th>Expiration Year</th>
-			<th>CCV</th>
+			<div><label>First Name:</label></div>
+			<div><?php
+
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT FNAME FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['FNAME'];}?></div>
 			
-		</thead>
-	
-		<?php
+			<div><label>Last Name:</label></div>
+			<div>
+			<?php
 
-		//connect to the database
-		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-		$email=($_SESSION['email']);
-		$email=makeStringSafe($db,$email);
-		//Set up the query to get information on the cars from the database
-		$query = "SELECT ID,FNAME,LNAME,STREET,CITY,USSTATE,ZIP,PHONE,CARDNAME,CARDNUMBER,EXMONTH,EXYEAR,CCV 
-		FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT LNAME FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['LNAME'];}?></div>
+			
+			<div><label>Street:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT STREET FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['STREET'];}?></div>
+			
+			<div><label>City:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT CITY FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['CITY'];}?></div>
+			
+			<div><label>State:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT USSTATE FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db);
+			while($row = nextTuple($result))
+			{echo $row['STATE'];}?></div>
+			
+			<div><label>Zip:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT ZIP FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db);
+			while($row = nextTuple($result))
+			{echo $row['ZIP'];} ?></div>
+			
+			<div><label>Phone Number:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT PHONE FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['PHONE'];}?></div>
+			
+			<div><label>Name on Card:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT CARDNAME FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['CARDNAME'];}?></div>
+			
+			<div><label>Card Number:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT CARDNUMBER FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['CARDNUMBER'];}?></div>
+			
+			<div><label>Expiration Month:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT EXMONTH FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['EXMONTH'];}?></div>
+			
+			<div><label>Expiration Year:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT EXYEAR FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['EXYEAR'];}?></div>
+			
+			<div><label>CCV:</label></div>
+			<div><?php
+			//connect to the database
+			$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+			$email=($_SESSION['email']);
+			$email=makeStringSafe($db,$email);
+			//Set up the query to get information on the cars from the database
+			$query = "SELECT CCV  FROM USERS1 WHERE EMAIL = '" . $email . "';";
+			//run the query
+			$result= queryDB($query, $db); 
+			while($row = nextTuple($result))
+			{echo $row['CCV'];}?></div>
 		
-		//run the query
-		$result= queryDB($query, $db);
-				
-		while($row = nextTuple($result))
-		{
-			echo'<tr>';
-			echo '<td>' . $row['FNAME'] . '</td>';
-			echo '<td>' . $row['LNAME'] . '</td>';
-			echo '<td>' . $row['STREET'] . '</td>';
-			echo '<td>' . $row['CITY'] . '</td>';
-			echo '<td>' . $row['USSTATE'] . '</td>';
-			echo '<td>' . $row['ZIP'] . '</td>';
-			echo '<td>' . $row['PHONE'] . '</td>';
-			echo '<td>' . $row['CARDNAME'] . '</td>';
-			echo '<td>' . $row['CARDNUMBER'] . '</td>';
-			echo '<td>' . $row['EXMONTH'] . '</td>';
-			echo '<td>' . $row['EXYEAR'] . '</td>';
-			echo '<td>' . $row['CCV'] . '</td>';
-
-			echo "<td><a href='updateprofile.php?ID=" . $row['ID']  .  "'>edit</a></td>";
-			echo'</tr>';
-		}
-		?>
-	</table>
+			<?php if (isset($_POST['submit']))
+			{header('Location: edit.php');} ?>
+		<form action="profile.php" method="post">
+			<div class="form-group">
+			<button type="submit" class="btn btn-default" name="submit">Edit</button>
+			</div>
+		</form>
 		</div>
 	</div>
 <?php
