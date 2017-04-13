@@ -27,7 +27,13 @@
 			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">A-Z</option>
 			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME DESC;">Z-A</option>
 			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">Category</option>
-	</select><button type ="submit" class="btn btn-default" name="submit">Go</button>
+			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PRICE;">Price</option>
+	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
+	<div>
+	<input  type="text" name="name"> 
+	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
+
+	</div>
 </form>
 	<table class='table table-hover'>
 
@@ -44,8 +50,10 @@
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
 
-		if (isset($_POST['submit']))
+		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
+		else if (isset($_POST['search']))
+		{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '" . $_POST['search'] . "';";}
 		else{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;";}
 		$result= queryDB($query, $db);
 				
@@ -53,10 +61,11 @@
 		{
 			echo'<tr>';
 			echo'<td>';
+			
 			if ($row['IMAGE'])
 			{$imagelocation=$row['IMAGE'];
 			$altText="product" . $row['PNAME'];
-			echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+			echo "<img src='$imagelocation' width='150' alt=$altText'>";}  
 			echo'</td>';
 			echo '<td>' . $row['PNAME'] . '</td>';
 			echo '<td>' . $row['CATEGORY'] . '</td>';

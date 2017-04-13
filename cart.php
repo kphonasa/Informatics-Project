@@ -17,3 +17,6 @@
 	$menuActive=5;
 	include_once("shopperheader.php");
 ?>
+<?php
+	include_once("footer.php");
+?>

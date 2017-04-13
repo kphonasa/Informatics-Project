@@ -128,6 +128,10 @@
 			}
 			echo("Successfully updated profile.");
 		}
+		else if (isset($_POST['delete']))
+			{header('Location: deleteuser.php');
+			exit;}
+		
 	?>
 		</div>
 	</div>
@@ -253,6 +257,10 @@
 	</div>
 	
 	<button type ="submit" class="btn btn-default" name="submit">Update</button>
+	<button type ="submit" class="btn btn-default" name="delete">Delete</button>
 </form>
 		</div>
 	</div>
+	<?php
+	include_once("footer.php");
+?>
