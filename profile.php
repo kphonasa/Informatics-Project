@@ -179,7 +179,8 @@
 			{echo $row['CCV'];}?></div>
 		
 			<?php if (isset($_POST['submit']))
-			{header('Location: edit.php');} ?>
+			{header('Location: edit.php');
+			exit;} ?>
 		<form action="profile.php" method="post">
 			<div class="form-group">
 			<button type="submit" class="btn btn-default" name="submit">Edit</button>
