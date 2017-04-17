@@ -17,7 +17,7 @@
 		body  {
 			background-image: url("https://webdev.cs.uiowa.edu/~kwang9/project/image/FoodBackground.jpg");
 			background-color: #cccccc;
-			color: blue;
+			color: black;
 			font-size: 20px;
 		}
 	</style>
@@ -38,35 +38,28 @@
 			</div>
 		</div>
         
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="navbar navbar-inverse">
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
 				<!--Menu-->
 					<div class="container fluid">
-					<ul class="nav nav-pills">
-						<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
-						<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
-						<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
-						<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
-						<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUsers.php">Register</a></li>
-					</ul>
+						<ul class="nav nav-pills">
+							<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
+							<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
+							<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
+							<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
+							<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUsers.php">Register</a></li>
+							<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
+								<div class="input-group add-on">
+								  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
+								  <div class="input-group-btn">
+									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>							  </div>
+								</div>
+							</form>
+						</ul>
 					</div>
 				</div>
-		
-					<div class="container">
-						<div class="col-md-3">
-						  <form action="get.php" method="get" class="navbar-form" role="search">
-							<div class="input-group add-on">
-							  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
-							  <div class="input-group-btn">
-								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-							  </div>
-							</div>
-							</form>
-						</div>
-					</div>
-		
-				
-				
 			</div>
 		</div>
+	</div>
+</nav>
