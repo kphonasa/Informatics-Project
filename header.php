@@ -12,13 +12,21 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+		body  {
+			background-color: green;
+			color: black;
+			font-size: 20px;
+		}
+	</style>
+    
     
 </head>
         
         
         
     <!-- Menu bar -->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-left">
                 <li <?php if($logActive == 0) { echo 'class="active"'; } ?>><a href="https://webdev.cs.uiowa.edu/~kwang9/project/login.php"><span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;  Login</a></li>
