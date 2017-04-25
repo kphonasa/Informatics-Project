@@ -9,24 +9,30 @@
 	include_once("guestheader.php");
 ?>
 
-<html>
-	<body>
+    <div class='row'>
+            <div class='col-xs-12'>
+
 		<p>
 			Welcome to our store, how about try some random items?
 		</p>
+			</div>
+	</div>
+	
 <!-- Content table here -->
     <div class='row'>
-            <div class='col-xs-12'>
-<table class='table table-hover'>
+        <div class='col-xs-12'>
+<table class="table table-inverse">
     <!-- header for the table -->
     <thead>
-        <th></th>
-		<th>Name</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>QTY</th>
-		<th> </th>
+        <tr>
+			<th></th>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Category</th>
+			<th>Price</th>
+			<th>QTY</th>
+			<th> </th>
+		</tr>	
 
     </thead>
 	
@@ -34,11 +40,7 @@
     /*
      *List all Productes that are in the DB
      *
-     */
-    //include config and utils files
-    include_once('config.php');
-    include_once('dbutils.php');
-    
+     */    
     // connect to the DB
     $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
 	
@@ -54,7 +56,7 @@
 		if ($row['IMAGE'])
 		{$imagelocation=$row['IMAGE'];
 		$altText="product" . $row['PNAME'];
-		echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+		echo "<td><img src='$imagelocation' width='150' alt=$altText'>";}
 		echo'</td>';
         echo "<td>" .$row['PNAME'] . "</td>";
         echo "<td>" .$row['DDESCRIPTION'] . "</td>";

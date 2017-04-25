@@ -2,7 +2,7 @@
 <head>
     <title><?php echo $title;?></title>
     
-    <neta name="viewport" content="width=device-widthe, initial-scale-1.0">
+    <meta name="viewport" content="width=device-widthe, initial-scale-1.0">
     
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -15,8 +15,7 @@
 	
 	<style>
 		body  {
-			background-image: url("https://webdev.cs.uiowa.edu/~kwang9/project/image/FoodBackground.jpg");
-			background-color: #cccccc;
+			background-color: hsl(120, 100%, 75%);;
 			color: black;
 			font-size: 20px;
 		}
@@ -25,7 +24,7 @@
 	
 	
 </head>
-
+<body>
 
     <div class="container">
 		<!--Container for all content to be displayed-->
@@ -34,11 +33,12 @@
 				<div class="page-header">
 				<!--Header-->
 				
-				<h1><font color="black" face="Constantia" font size="24"><b><?php echo $h1;?></b></font></h1> 
+				<h1><font color="black" face="Constantia" font size="24"><b><?php echo $h1;?></b></font></h1>
+				</div>
 			</div>
 		</div>
         
-		<div class="navbar navbar-default">
+		<div class="navbar navbar-inverse navbar-static-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 				<!--Menu-->
@@ -48,7 +48,7 @@
 							<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
 							<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
 							<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
-							<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUsers.php">Register</a></li>
+							<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUser.php">Register</a></li>
 							<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
 								<div class="input-group add-on">
 								  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
@@ -61,5 +61,3 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</nav>
