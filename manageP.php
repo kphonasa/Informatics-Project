@@ -3,7 +3,7 @@
 <?php
 // this kicks users out if they are not logged in
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['EMAIL'])) {
         header('Location: stafflogin.php');
         exit;
     }
@@ -221,7 +221,7 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= "SELECT PNAME,DESCRIPTION,CATEGORY, PRICE, QTY, IMAGE FROM PRODUCT;";
+    $query= "SELECT ID,PNAME,DESCRIPTION,CATEGORY, PRICE, QTY, IMAGE FROM PRODUCT;";
     
     $result= queryDB($query,$db);
     
@@ -239,7 +239,10 @@
             echo "<img src='$imageLocation' width='150' alt='$altText'>";
         }
         echo "</td>";
-                
+        
+		echo "<td><a href='updateproduct.php?ID=" . $row['ID']  .  "'>edit</a></td>";
+		
+		echo "<td><a href='deleteproduct.php?ID=" . $row['ID']  .  "'>delete</a></td>";
         
         echo "<tr> \n";
     }
