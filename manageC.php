@@ -2,7 +2,7 @@
 <?php
 // this kicks users out if they are not logged in
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['EMAIL'])) {
         header('Location: stafflogin.php');
         exit;
     }
@@ -163,15 +163,12 @@
 
 		<!--include config and util files-->
 		<?php
-
 		//connect to the database
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-
 		//Set up the query to get information on the cars from the database
-		
+
 		
 		//run the query
-
 		if (isset($_POST['submit']))
 		{$query = $_POST['order'];}
 		else{$query ="SELECT CNAME FROM CATEGORY ORDER BY CNAME ASC;";}
