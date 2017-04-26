@@ -22,6 +22,8 @@
 			<div id="container">
 		
 <form action = "browseP.php" method="post">
+	<input  type="text" name="name"> 
+	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
 			<option selected disabled hidden>Order By:</option>
 			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">A-Z</option>
@@ -30,9 +32,6 @@
 			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PRICE;">Price</option>
 	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
 	<div>
-	<input  type="text" name="name"> 
-	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
-
 	</div>
 </form>
 	<table class='table table-hover'>
@@ -42,6 +41,8 @@
 			<th>Product</th>
 			<th>Category</th>
 			<th>Price</th>
+			<th>Quantity</th>
+			<th>Add to Cart</th>
 		</thead>
 		<!--include config and util files-->
 		<?php
@@ -53,8 +54,8 @@
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
 		else if (isset($_POST['search']))
-		{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '%" . $_POST['name'] . "%';";}
-		else{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;";}
+		{$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '%" . $_POST['name'] . "%';";}
+		else{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE, ID FROM PRODUCT ORDER BY PNAME ASC;";}
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
@@ -67,9 +68,12 @@
 			$altText="product" . $row['PNAME'];
 			echo "<img src='$imagelocation' width='150' alt=$altText'>";}  
 			echo'</td>';
-			echo '<td>' . $row['PNAME'] . '</td>';
+			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+			echo '<td>' . $row['PNAME'] . '</td>'; echo "</a>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
+			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?action=add&code='" . ['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
 			echo'</tr>';
 		}
 		?>
