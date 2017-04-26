@@ -39,6 +39,7 @@ if (isset($_POST['submit']))
 	//get data from form
 	$email=$_POST['email'];
 	$password=$_POST['password'];
+	
 
 	//connect to database
 	$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -65,7 +66,7 @@ if (isset($_POST['submit']))
 	}
 
 	//get the hashed password from the user with the email that got entered
-	$query="SELECT HASHEDPASS FROM STAFF WHERE EMAIL='" . $email . "';";
+	$query="SELECT STOREID,HASHEDPASS FROM STAFF WHERE EMAIL='" . $email . "';";
 	$result=queryDB($query, $db);
 	if (nTuples($result)>0)
 	{
@@ -73,13 +74,16 @@ if (isset($_POST['submit']))
 		//get the hashed pass for the account
 		$row = nextTuple($result);
 		$hashedpass = $row['HASHEDPASS'];
+		$storeid=$row['STOREID'];
 	
 		//compare entered pass to pass in database
 		if ($hashedpass==crypt($password, $hashedpass))
 		{
 			if (session_start())
 			{
-				$_SESSION['email']=$email;
+				
+				$_SESSION['EMAIL']=$email;
+				$_SESSION['STOREID']=$storeid;
 				header("Location: staffhome.php");
 				exit;
 			}
@@ -104,10 +108,13 @@ if (isset($_POST['submit']))
 		<input type="email" style="width: 500" class="form-control" name="email"/>
 	</div>
 	
+	
+	
 	<div class="form-group">
 		<label for="password">Password</label>
 		<input type="password" style="width: 500" class="form-control" name="password"/>
 	</div>
+	
 	
 	<button type="submit" class="btn btn-default" name="submit">Login</button>
 	
