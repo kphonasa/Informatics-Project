@@ -6,6 +6,10 @@
         header('Location: stafflogin.php');
         exit;
     }
+	else if (!isset($_SESSION['STOREID'])) {
+        header('Location: stafflogin.php');
+        exit;
+    }
 ?>
 
 <html>
@@ -157,7 +161,7 @@
 
 
 
-<!--show manufactuere-->
+<!--show category-->
 	<table class='table table-hover'>
 
 
@@ -171,7 +175,7 @@
 		//run the query
 		if (isset($_POST['submit']))
 		{$query = $_POST['order'];}
-		else{$query ="SELECT CNAME FROM CATEGORY ORDER BY CNAME ASC;";}
+		else{$query ="SELECT CNAME FROM CATEGORY WHERE STOREID='" . $_SESSION['STOREID'] . "' ORDER BY CNAME ASC;";}
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
