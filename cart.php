@@ -27,7 +27,7 @@ $query = "CREATE TABLE IF NOT EXISTS TEMP(
 	QTY INT NOT NULL,
 	PRICE INT NOT NULL,
 	PRIMARY KEY(ID));";
-$result = queryDB($query, $db);
+queryDB($query, $db);
 ?>
 <h1>Your Shopping Cart</h1>
 <table class='table table-hover'>

@@ -17,6 +17,17 @@
 	$menuActive=1;
 	include_once("shopperheader.php");
 ?>
+<?php 
+$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+$query = "CREATE TABLE IF NOT EXISTS TEMP(
+	ID INT NOT NULL AUTO_INCREMENT,
+	PNAME VARCHAR(128) NOT NULL,
+	PRODUCTID INT NOT NULL,
+	QTY INT NOT NULL,
+	PRICE INT NOT NULL,
+	PRIMARY KEY(ID));";
+queryDB($query, $db);
+?>
 	<div class="col-xs-6">
 		<div class="col-xs-12">
 			<div id="container">
@@ -69,7 +80,6 @@
 			echo "<img src='$imagelocation' width='150' alt=$altText'>";}  
 			echo'</td>';
 			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-			echo '<td>' . $row['PNAME'] . '</td>'; echo "</a>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
 			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?action=add&code='" . ['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
