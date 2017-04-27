@@ -17,7 +17,7 @@
 
 	<style>
 		body  {
-			background-color: green;
+			background-color: hsl(120, 100%, 75%);
 			color: black;
 			font-size: 20px;
 		}
@@ -37,12 +37,11 @@
 			</div>
 		</div>
         
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="navbar navbar-inverse navbar-static-top">
+	<nav class="navbar navbar-defult">
+		<div class="container">	
 				<!--Menu-->
-					<div class="container fluid">
-						<ul class="nav nav-pills">
+				<div class="container fluid">
+					<ul class="nav nav-tabs">
 							<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="shopperhome.php">Home</a></li>
 							<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browseP.php">Browse Products</a></li>
 							<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseC.php">Browse Categories</a></li>
