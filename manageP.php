@@ -7,6 +7,10 @@
         header('Location: stafflogin.php');
         exit;
     }
+	else if (!isset($_SESSION['STOREID'])) {
+        header('Location: stafflogin.php');
+        exit;
+    }
 ?>
 
 
@@ -23,7 +27,7 @@
     //if we are here, it means that the form was submitted and we need to process form data
     
     //get data from form
-	$storeid=$_POST['STOREID'];
+	$storeid=$_SESSION['STOREID'];
 	$pname=$_POST['PNAME'];
     $description=$_POST['DESCRIPTION'];
 	$image=$_POST['IMAGE'];
@@ -68,7 +72,7 @@
     
     
     //put together SQL to insert new record
-    $query="INSERT INTO PRODUCT(STOREID,PNAME,DESCRIPTION,CATEGORY,PRICE,QTY) VALUES ('" . $storeid . "','" . $pname . "','" . $pname . "','" . $description . "','" . $category . "','" . $qty . "','" . $category . "');";
+    $query="INSERT INTO PRODUCT(STOREID,PNAME,DESCRIPTION,CATEGORY,PRICE,QTY) VALUES ('" . $storeid . "','" . $pname . "','" . $description . "','" . $category . "','" . $price . "','" . $qty . "');";
     
     //get a handle to database
      $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -155,15 +159,15 @@
 </div>
 <div class="form-group">
     <label for="CATEGORY">Category:</label>
-        <select class="form-control" style="width: 500" name="STOREID">
+        <select class="form-control" style="width: 500" name="CATEGORY">
 		<?php $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
 	
-		$query="SELECT CNAME,ID FROM CATEGORY;";
+		$query="SELECT CNAME,ID FROM CATEGORY WHERE STOREID='" . $_SESSION['STOREID'] . "';";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
-		{ echo'<option value=' . $row['ID'] . '>';echo($row['CNAME']); echo'</option>';}?>
+		{ echo'<option value=' . $row['CNAME'] . '>';echo($row['CNAME']); echo'</option>';}?>
 	</select>
     
 </div>
@@ -221,7 +225,7 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= "SELECT ID,PNAME,DESCRIPTION,CATEGORY, PRICE, QTY, IMAGE FROM PRODUCT;";
+    $query= "SELECT ID,PNAME,DESCRIPTION,CATEGORY, PRICE, QTY, IMAGE FROM PRODUCT WHERE STOREID='" . $_SESSION['STOREID'] . "';";
     
     $result= queryDB($query,$db);
     
