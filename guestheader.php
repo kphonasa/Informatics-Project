@@ -15,7 +15,7 @@
 	
 	<style>
 		body  {
-			background-color: hsl(120, 100%, 75%);;
+			background-color: hsl(120, 100%, 75%);
 			color: black;
 			font-size: 20px;
 		}
@@ -26,38 +26,37 @@
 </head>
 <body>
 
-    <div class="container">
-		<!--Container for all content to be displayed-->
+	<div class="container">
+	<!--Container for all content to be displayed-->
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="page-header">
-				<!--Header-->
-				
-				<h1><font color="black" face="Constantia" font size="24"><b><?php echo $h1;?></b></font></h1>
+				<!--Header-->		
+					<h1><b><?php echo $h1;?></b></font></h1>
 				</div>
 			</div>
 		</div>
-        
-		<div class="navbar navbar-inverse navbar-static-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
+	</div>
+		
+	<nav class="navbar navbar-defult">
+		<div class="container">	
 				<!--Menu-->
-					<div class="container fluid">
-						<ul class="nav nav-pills">
-							<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
-							<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
-							<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
-							<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
-							<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUser.php">Register</a></li>
-							<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
-								<div class="input-group add-on">
-								  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
-								  <div class="input-group-btn">
-									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>							  </div>
-								</div>
-							</form>
-						</ul>
-					</div>
+				<div class="container fluid">
+					<ul class="nav nav-tabs">
+						<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
+						<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
+						<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
+						<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
+						<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUser.php">Register</a></li>
+						<li <?php if($menuActive==5){echo 'class="active"';}?>><a href="guestcart.php">Shopping Cart</a></li>
+						<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
+							<div class="input-group add-on">
+							  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
+							  <div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>							  </div>
+							</div>
+						</form>
+					</ul>
 				</div>
-			</div>
 		</div>
+	</nav>
