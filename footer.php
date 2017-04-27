@@ -1,18 +1,8 @@
-</div>
-
-<div class='row'>
-	<div class='col-xs-12'>
-		<p>
-			Contact us with: 319-###-####
-		</p>
-	</div>
-</div>
-
-
-
+	
+	<footer>
+	  <p>Designed by: GROUP 2</p>
+	  <p>Contact information: xxxxxxxxx</p>
+	</footer>
 
 	</body>
-
-
-
 </html>
