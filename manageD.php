@@ -16,6 +16,10 @@
         header('Location: stafflogin.php');
         exit;
     }
+	else if (!isset($_SESSION['STOREID'])) {
+        header('Location: stafflogin.php');
+        exit;
+    }
 ?>
 
 <html>
@@ -42,30 +46,22 @@
 	$menuActive=3;
 	include_once("staffHeader.php");
 	
-	if(isset($_GET['shipping']))
-	{
-		$db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-		$query="UPDATE ORDERS SET STATUS='" . $_GET['shipping'] . "' WHERE ID=" .$row['ID'] . ";";
-		$result= queryDB($query,$db);
-		
-	}
-	if(isset($_GET['delivered']))
-	{
-		$db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-		$query="UPDATE ORDERS SET STATUS='" . $_GET['delivered'] . "' WHERE ID=" .$row['ID'] . ";";
-		$result= queryDB($query,$db);
-		
-	}
-	if(isset($_GET['returned']))
-	{
-		$db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-		$query="UPDATE ORDERS SET STATUS='" . $_GET['returned'] . "' WHERE ID=" .$row['ID'] . ";";
-		$result= queryDB($query,$db);
-		
-	}
 	
 
-?>       
+?>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-left">
+        <li class="active"><a href="manageD.php">order placed</a></li>
+        <li><a href="manageD2.php">shipping</a></li>
+		<li><a href="manageD3.php">delivered</a></li>
+		<li><a href="manageD4.php">returned</a></li>
+     </ul>
+     
+  </div>
+</nav>
+
 <div class="row">
     <div class="col-xs-12">
         
@@ -85,7 +81,7 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= "SELECT ID, USERID,PRODUCTID,ORDERDATE,STATUS,TOTALP FROM ORDERS;";
+    $query= "SELECT ID, USERID,PRODUCTID,ORDERDATE,STATUS,TOTALP FROM ORDERS WHERE STOREID='" . $_SESSION['STOREID'] . "' AND STATUS='ORDER PLACED';";
     
     $result= queryDB($query,$db);
     
@@ -98,9 +94,7 @@
         echo "<td>" . $row['ORDERDATE'] . "</td>";
 		echo "<td>" . $row['STATUS'] . "</td>";
 		echo "<td>" . $row['TOTALP'] . "</td>";
-		echo '<td><button type="button" class="btn btn-default" name="shipping">shipping</button></td>';
-		echo '<td><button type="button" class="btn btn-default" name="delivered">delivered</button></td>';
-		echo '<td><button type="button" class="btn btn-default" name="returned">returned</button></td>';
+		echo "<td><a href='ship.php?ID=" . $row['ID']  .  "'>ship</a></td>";
         echo "<tr> \n";
     }
 	
