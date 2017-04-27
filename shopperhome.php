@@ -49,23 +49,23 @@
     $result = queryDB($query, $db);
     
 	
-    while($row = nextTuple($result)) {
-        echo "\n <tr>";
-		if ($row['IMAGE'])
-		{$imagelocation=$row['IMAGE'];
-		$altText="product" . $row['PNAME'];
-		echo "<td><img src='$imagelocation' width='150' alt=$altText'>";}
-		echo'</td>';
-        echo "<td>" .$row['PNAME'] . "</td>";
-        echo "<td>" .$row['DDESCRIPTION'] . "</td>";
-        echo "<td>" .$row['CATEGORY'] . "</td>";
-        echo "<td>" .$row['PRICE'] . "</td>";
-        echo "<td>" .$row['QTY'] . "</td>";
-		echo "<td>" .'<a href="' . 'ordersguest.php' . '">Add to Cart</a>' . "</td>";
-		
-		echo '<td>';
-        echo "</tr> \n";
-    }
+    while($row = nextTuple($result))
+		{
+			echo'<tr>';
+			echo'<td>';
+			
+			if ($row['IMAGE'])
+			{$imagelocation=$row['IMAGE'];
+			$altText="product" . $row['PNAME'];
+			echo "<img src='$imagelocation' width='150' alt=$altText'>";}  
+			echo'</td>';
+			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+			echo '<td>' . $row['CATEGORY'] . '</td>';
+			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
+			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browsePguest.php?action=add&code='" . ['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
+			echo'</tr>';
+		}
 ?>
 	
 	</table>	
