@@ -39,7 +39,6 @@
     }
     
     
-
     /*
      * Check if a GET variable was passed with the id for the pizza
      *
@@ -104,7 +103,7 @@
 <!-- Visible title -->
 <div class="row">
     <div class="col-xs-12">
-        <h1>Do you want to delete the <?php echo $name; ?> pizza?</h1>
+        <h1>Do you want to delete the <?php echo $name; ?>?</h1>
     </div>
 </div>
 
