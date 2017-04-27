@@ -2,7 +2,11 @@
 <?php
 // this kicks users out if they are not logged in
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['EMAIL'])) {
+        header('Location: stafflogin.php');
+        exit;
+    }
+	else if (!isset($_SESSION['STOREID'])) {
         header('Location: stafflogin.php');
         exit;
     }
