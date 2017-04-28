@@ -17,7 +17,6 @@
 		body  {
 			background-color: hsl(120, 100%, 75%);
 			color: black;
-			font-size: 20px;
 		}
 	</style>
 	
