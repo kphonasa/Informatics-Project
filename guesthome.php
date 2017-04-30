@@ -43,8 +43,7 @@
 				<div class="row">
 					<div class="col-sm-9 col-xs-12">
 						<h1>Welcome to Hvyee !</h1>
-						<p><a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>
-					</div>	
+						<p><a class="btn btn-group btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>					</div>	
 				</div>	
 			</div>
 		
