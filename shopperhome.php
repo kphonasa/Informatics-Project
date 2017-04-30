@@ -86,7 +86,7 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
@@ -115,7 +115,7 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
@@ -143,7 +143,7 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
