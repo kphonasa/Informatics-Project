@@ -39,23 +39,20 @@
 		</div>
 		
 		
-		<div class="jumbotron">
-			<div class="row">
-				<div class="col-sm-9 col-xs-12">
-					<h1>Welcome to Hvyee !</h1>
-					<p><a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a></p>
+			<div class="jumbotron">
+				<div class="row">
+					<div class="col-sm-9 col-xs-12">
+						<h1>Welcome to Hvyee !</h1>
+						<p><a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>
+					</div>	
 				</div>	
 			</div>
 		
-		
-		</div>
-		
-		
+<HR>		
 <!-- thumbnail icons /-->
 		<div class="containter">			
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -75,16 +72,14 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
 				</div>
 				
 				
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -104,15 +99,13 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
 				</div>
 			
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -132,15 +125,13 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -160,11 +151,10 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' alt=$altText'>";}
+								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
 				</div>
 				
 			</div>	
