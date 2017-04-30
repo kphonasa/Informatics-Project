@@ -66,7 +66,7 @@
 		<div class="containter">			
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
+
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -90,12 +90,12 @@
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
+				 
 				</div>
 				
 				
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
+					
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -119,11 +119,11 @@
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
+				 
 				</div>
 			
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
+					
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -147,11 +147,11 @@
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
+				  
 				</div>
 
 				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
+					
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -175,7 +175,7 @@
 								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 							}
 						?>
-				  </a>
+				
 				</div>
 				
 			</div>	
