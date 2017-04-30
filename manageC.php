@@ -39,7 +39,7 @@
     //if we are here, it means that the form was submitted and we need to process form data
     
     //get data from form
-	$storeid=$_POST['STOREID'];
+	$storeid=$_SESSION['STOREID'];
     $name=$_POST['CNAME'];
     
     //variable to keep track if the form is complete (set to false if there are any issue with data)
@@ -60,7 +60,7 @@
         $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
         
         
-        $query ="SELECT CNAME FROM STAFF,CATEGORY WHERE CNAME='$name' AND STAFF.STOREID=CATEGORY.STOREID;";
+        $query ="SELECT CNAME FROM CATEGORY WHERE CNAME='$name' AND CATEGORY.STOREID=$storeid;";
         
         //run query
         $result =queryDB($query,$db);
@@ -79,7 +79,7 @@
     
     
     //put together SQL to insert new record
-    $query="INSERT INTO CATEGORY(STOREID,CNAME) VALUES ('$storeid','$name');";
+    $query="INSERT INTO CATEGORY(STOREID,CNAME) VALUES ($storeid,'$name');";
     
     //get a handle to database
      $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -91,6 +91,9 @@
      echo("Successfully entered new category: " . $name);
      
      unset($isComplete,$errorMessage,$storeid,$name);
+	 header('Location: manageC.php');
+	 exit;
+	 
     }
 }
 ?>
@@ -129,19 +132,7 @@
 
 <form action="manageC.php" method="post">
 <!--name-->
-<div class="form-group">
-	<label for="STOREID">Storeid:</label>
-	<select class="form-control" style="width: 500" name="STOREID">
-		<?php $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-		//run the query
-	
-		$query="SELECT ID FROM STORE;";
-		$result= queryDB($query, $db);
-			
-		while($row = nextTuple($result))
-		{ echo'<option value=' . $row['ID'] . '>';echo($row['ID']); echo'</option>';}?>
-	</select>
-</div>
+
 
 <!--country-->
 <div class="form-group">
@@ -175,13 +166,14 @@
 		//run the query
 		if (isset($_POST['submit']))
 		{$query = $_POST['order'];}
-		else{$query ="SELECT CNAME FROM CATEGORY WHERE STOREID='" . $_SESSION['STOREID'] . "' ORDER BY CNAME ASC;";}
+		else{$query ="SELECT * FROM CATEGORY WHERE STOREID='" . $_SESSION['STOREID'] . "' ORDER BY CNAME ASC;";}
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
 		{
 			echo'<tr>';
 			echo '<td>' . $row['CNAME'] . '</td>';
+			echo "<td><a href='deleteC.php?ID=" . $row['ID']  .  "'>delete</a></td>";
 			echo'</tr>';
 		}
 		?>
