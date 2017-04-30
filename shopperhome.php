@@ -61,7 +61,7 @@
 				</div>	
 			</div>
 		
-		
+<HR>		
 <!-- thumbnail icons /-->
 		<div class="containter">			
 			<div class="row">
