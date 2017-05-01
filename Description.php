@@ -21,7 +21,7 @@ $ID=$_GET['ID'];
 
 if (!isset($_GET['ID'])){header ('Location:browseP.php'); exit;}
 $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-$query = "SELECT PNAME, DESCRIPTION, IMAGE, CATEGORY, PRICE FROM PRODUCT WHERE ID='$ID';";
+$query = "SELECT * FROM PRODUCT WHERE ID='" . $ID . "';";
 $result=queryDB($query, $db);
 $row=nextTuple($result);
 $PNAME=$row['PNAME'];
@@ -59,7 +59,7 @@ $PRICE=$row['PRICE'];
 	</div>
 </div>
 <div align="middle">
-<form method="post" action="Description.php?action=add&code='"<?php $ID ?>><input type="text" name="quantity" size="2"/> 
+<form method="post" action="Description.php?ID=<?php echo $ID ?>"><input type="text" name="quantity" size="2"/> 
 	<button type ="submit" class="btn btn-default" name="Add">Add to Cart</button>
 	<button type ="submit" class="btn btn-default" name="back">Go Back</button>
 </form>
@@ -67,7 +67,16 @@ $PRICE=$row['PRICE'];
 <?php if (isset($_POST['back']))
 	{header('Location: browseP.php');
 	exit;} 
+	if (isset($_POST['Add']))
+			{$QTY=$_POST['quantity'];
+			
+			$_SESSION['QTY']=$QTY;
+			$_SESSION['ID']=$ID;
+			header('Location: browseP2.php?ID=' . $ID . 'QTY=' . $QTY . '');
+			exit;
+			}
 ?>
+
 <?php
 	include_once("footer.php");
 ?>

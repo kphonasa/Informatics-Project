@@ -68,28 +68,27 @@
 			if ($row['IMAGE'])
 			{$imagelocation=$row['IMAGE'];
 			$altText="product" . $row['PNAME'];
-			echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' alt=$altText'>";}  
+			echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
 			echo'</td>';
 			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
-			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP2.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
 			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
 			if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			
-			if(!isset($QTY)){
-				$isCompletex =false;}
-			if($isCompletex){
-			$_SESSION['ID']=$_GET['ID'];
 			$_SESSION['QTY']=$QTY;
-			header('Location: browseP2.php');
+			$_SESSION['ID']=$_GET['ID'];
+			header('Location: browseP2.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . '');
 			exit;
-				}
+			}
+			
+			
 			echo'</tr>';
 			
 		}
-		}
+		
 	?>
 	</table>
 <?php
