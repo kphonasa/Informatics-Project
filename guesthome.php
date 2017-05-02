@@ -43,7 +43,8 @@
 				<div class="row">
 					<div class="col-sm-9 col-xs-12">
 						<h1>Welcome to Hvyee !</h1>
-						<p><a class="btn btn-group btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>					</div>	
+						<p><a class="btn btn-group btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>
+					</div>	
 				</div>	
 			</div>
 		
@@ -51,7 +52,6 @@
 <!-- thumbnail icons /-->
 		<div class="containter">			
 			<div class="row">
-				<div class="col-xs-6 col-md-3">
 						<?php											/*
 						 *List all Productes that are in the DB
 						 *
@@ -60,7 +60,7 @@
 						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
 						
 						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
+						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 4';
 						
 						// run the query
 						$result = queryDB($query, $db);
@@ -71,90 +71,12 @@
 								if ($row['IMAGE'])				
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+								echo '<div class="col-xs-3 col-md-3">';
+								echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'><BR>";}
+								echo "<a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a>";
+								echo '</div>';
 							}
 						?>
-				</div>
-				
-				
-				<div class="col-xs-6 col-md-3">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				</div>
-			
-				<div class="col-xs-6 col-md-3">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				</div>
-
-				<div class="col-xs-6 col-md-3">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'></td>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				</div>
 				
 			</div>	
 		</div>
