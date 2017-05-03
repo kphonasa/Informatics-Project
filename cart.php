@@ -29,12 +29,14 @@ $query = "CREATE TABLE IF NOT EXISTS TEMP(
 	PRIMARY KEY(ID));";
 queryDB($query, $db);
 ?>
+<div class="container">
 <h1>Your Shopping Cart</h1>
 <table class='table table-hover'>
 		<thead>
 			<th>Products</th>
 			<th>Quantity</th>
 			<th>Price</th>
+			<th></th>
 		</thead>
 
 
@@ -44,7 +46,7 @@ queryDB($query, $db);
 		//connect to the database
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
-		$query="(SELECT PNAME, QTY, PRICE FROM TEMP WHERE ID=1);";
+		$query="(SELECT * FROM TEMP);";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
@@ -52,13 +54,45 @@ queryDB($query, $db);
 			echo'<tr>';
 			echo '<td>' . $row['PNAME'] . '</td>';
 			echo '<td>' . $row['QTY'] . '</td>';
-			echo '<td>' . $row['PRICE'] . '</td>';
+			echo '<td>'; echo"$"; echo $row['PRICE'] . '</td>';
+			echo '<td>'; echo"<form method='post' action='cart.php?ID=" . $row['ID'] . "'>"; echo"<button type ='submit' class='btn btn-default' name='remove'>Remove</button></form>";echo'</td>';
 			echo'</tr>';
+			if (isset($_POST['remove']))
+			{
+			$_SESSION['ID']=$_GET['ID'];
+			header('Location: removeitem.php?ID=' . $_SESSION['ID'] . '');
+			exit;
+			}
 		}
-
+		
 		?>
 		
 	</table>
+	<table class='table table-hover'>
+	<thead>
+		<th>Total</th>
+		</thead>
+		<?php 
+		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+		//run the query
+		$queryx="SELECT SUM(QTY*PRICE) AS GRAND_TOTAL FROM TEMP;";
+		$resultx= queryDB($queryx, $db);
+		while($row = nextTuple($resultx))
+		{echo '<tr><td>';echo "$"; echo $row['GRAND_TOTAL']; echo '</tr></td>';}
+		?>
+	</table>
+		<div class="container">
+		<form action="cart.php" method="post">
+			<div class="form-group">
+			<button type="submit" class="btn btn-default" name="order">Place Order</button>
+			</div>
+		</form>
+		</div>
+
+	<?php if (isset($_POST['order']))
+			{header('Location: placeorder.php');
+			exit;} ?>
+	</div>
 <?php
 	include_once("footer.php");
 ?>

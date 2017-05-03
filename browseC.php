@@ -55,13 +55,13 @@ queryDB($query, $db);
 
 		if (isset($_POST['submit']))
 		{$query = $_POST['order'];}
-		else{$query ="SELECT CNAME FROM CATEGORY ORDER BY CNAME ASC;";}
+		else{$query ="SELECT * FROM CATEGORY ORDER BY CNAME ASC;";}
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
 		{
 			echo'<tr>';
-			echo '<td>' . $row['CNAME'] . '</td>';
+			echo "<td><a href='browseC2.php?ID=" . $row['ID'] . "'>" . $row['CNAME'] . "</a></td>";
 			echo'</tr>';
 		}
 		?>
