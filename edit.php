@@ -7,6 +7,11 @@
 		header('Location: shopperlogin.php');
 		exit;
 	}
+		if (!isset($_SESSION['STORE']))
+	{
+		header('Location: selectS.php');
+		exit;
+	}
 ?>
 <?php
 	include_once('config.php');

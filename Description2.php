@@ -16,9 +16,9 @@
 	include_once('config.php');
 	include_once('dbutils.php');
 
-	$title ="Products";
-	$h1 = "Products";
-	$menuActive=1;
+	$title ="Categories";
+	$h1 = "Categories";
+	$menuActive=2;
 	include_once("shopperheader.php");
 ?>
 <?php 
@@ -64,20 +64,20 @@ $PRICE=$row['PRICE'];
 	</div>
 </div>
 <div align="middle">
-<form method="post" action="Description.php?ID=<?php echo $ID ?>"><input type="text" name="quantity" size="2"/> 
+<form method="post" action="Description2.php?ID=<?php echo $ID ?>"><input type="text" name="quantity" size="2"/> 
 	<button type ="submit" class="btn btn-default" name="Add">Add to Cart</button>
 	<button type ="submit" class="btn btn-default" name="back">Go Back</button>
 </form>
 </div>
 <?php if (isset($_POST['back']))
-	{header('Location: browseP.php');
+	{header('Location: browseC2.php?ID=' . $ID . '');
 	exit;} 
 	if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			
 			$_SESSION['QTY']=$QTY;
 			$_SESSION['ID']=$ID;
-			header('Location: browseP2.php?ID=' . $ID . 'QTY=' . $QTY . '');
+			header('Location: browseC2.php?ID=' . $ID . 'QTY=' . $QTY . '');
 			exit;
 			}
 ?>

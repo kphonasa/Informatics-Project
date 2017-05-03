@@ -7,6 +7,11 @@
 		header('Location: shopperlogin.php');
 		exit;
 	}
+		if (!isset($_SESSION['STORE']))
+	{
+		header('Location: selectS.php');
+		exit;
+	}
 ?>
 <?php
 	include_once('config.php');
@@ -19,27 +24,24 @@
 ?>
 <?php 
 $ID=$_GET['ID'];
-$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-$queryx="SELECT CNAME FROM CATEGORY WHERE ID='" . $ID . "';";
-$resultx=queryDB($queryx, $db);
-while($row = nextTuple($resultx)){$CNAME=$row['CNAME'];}
 ?>
-<div class="col-xs-6">
+	<div class="col-xs-6">
 		<div class="col-xs-12">
 			<div id="container">
-		
-<form action = "browseC2.php" method="post">
-	<input  type="text" name="name"> 
+			<form action = "browseC2.php?ID=<?php echo ($ID); ?>" method="post">
+			<input  type="text" name="name"> 
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
-			<option selected disabled hidden>Order By:</option>
-			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY=<?php $CNAME ?> ORDER BY PNAME ASC;">A-Z</option>
-			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY=<?php $CNAME ?> ORDER BY PNAME DESC;">Z-A</option>
-			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY=<?php $CNAME ?> ORDER BY PRICE;">Price</option>
+		<option selected disabled hidden>Order By:</option>
+		<option value="SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
+		<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
+		<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PRICE;">Price</option>
 	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
-	<div>
+	</form>
 	</div>
-</form>
+</div>
+		
+
 	<table class='table table-hover'>
 
 		<thead>
@@ -52,8 +54,7 @@ while($row = nextTuple($resultx)){$CNAME=$row['CNAME'];}
 		</thead>
 		<!--include config and util files-->
 		<?php
-	
-		
+
 		//connect to the database
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
@@ -61,8 +62,9 @@ while($row = nextTuple($resultx)){$CNAME=$row['CNAME'];}
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
 		else if (isset($_POST['search']))
-		{$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY='" . $CNAME . "' PNAME LIKE '%" . $_POST['name'] . "%';";}
-		else{$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE, ID FROM PRODUCT WHERE CATEGORY='" . $CNAME . "' ORDER BY PNAME ASC;";}
+		{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $ID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
+		else{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $ID . "' ORDER BY PRODUCT.PNAME ASC;";}
+	
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
@@ -74,9 +76,9 @@ while($row = nextTuple($resultx)){$CNAME=$row['CNAME'];}
 			if ($row['IMAGE'])
 			{$imagelocation=$row['IMAGE'];
 			$altText="product" . $row['PNAME'];
-			echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
+			echo "<a href='Description2.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
 			echo'</td>';
-			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+			echo "<td><a href='Description2.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
 			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseC2.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
@@ -97,3 +99,6 @@ while($row = nextTuple($resultx)){$CNAME=$row['CNAME'];}
 		
 	?>
 	</table>
+<?php
+	include_once("footer.php");
+?>

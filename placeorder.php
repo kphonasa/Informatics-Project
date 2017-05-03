@@ -7,6 +7,11 @@
 		header('Location: shopperlogin.php');
 		exit;
 	}
+		if (!isset($_SESSION['STORE']))
+	{
+		header('Location: selectS.php');
+		exit;
+	}
 ?>
 <?php
 	include_once('config.php');
@@ -28,6 +33,7 @@
   <input type="time" name="ORDERTIME">
   </div>
   <button type="submit" class="btn btn-default" name="submit">Set Delivery</button>
+  <button type ="submit" class="btn btn-default" name="back">Go Back</button>
 </form>
 </div>
 <?php
@@ -49,8 +55,8 @@ if (isset($_POST['submit']))
 		$errorMessage .= "Please select a time for delivery.";
 		$isComplete = false;
 	}
-	$start = strtotime('08:00:00');
-	$end = strtotime('20:00:00');
+	$start = strtotime('08:00');
+	$end = strtotime('20:00');
 
 	if($ORDERTIME >= $start && $ORDERTIME <= $end) 
 	{
@@ -76,6 +82,7 @@ if (isset($_POST['submit']))
 	{
 		echo '<div class="alert alert-danger" role="alert">';
 		echo ($errorMessage);
+		echo $ORDERTIME;
 		echo '</div>';
 	}
 	else{
@@ -92,5 +99,9 @@ if (isset($_POST['submit']))
 		}
 	}
 	}
+	
 }
+if (isset($_POST['back']))
+	{header('Location: cart.php');
+	exit;} 
 ?>
