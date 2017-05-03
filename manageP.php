@@ -83,6 +83,7 @@
 	$productid = mysqli_insert_id($db);
 	
 	// check if there's a picture
+	var_dump($_FILES['IMAGE']);
         if ($_FILES['IMAGE']['size'] > 0) {
             // if there is a picture
             
@@ -141,7 +142,7 @@
 <div class="row">
     <div class="col-xs-12">
 
-<form action="manageP.php" method="post">
+<form action="manageP.php" method="post" enctype="multipart/form-data">
 <!--maker-->
 
 <div class="form-group">
