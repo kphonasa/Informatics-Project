@@ -2,7 +2,6 @@
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
-
 	$title ="Deliveries";
 	$h1 = "Deliveries";
 	$menuActive=3;
@@ -40,14 +39,12 @@
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
-
 	$title ="Deliveries";
 	$h1 = "Deliveries";
 	$menuActive=3;
 	include_once("staffHeader.php");
 	
 	
-
 ?>
 
 <nav class="navbar navbar-default">
@@ -81,7 +78,7 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= "SELECT ID, USERID,PRODUCTID,ORDERDATE,STATUS,TOTALP FROM ORDERS WHERE STOREID='" . $_SESSION['STOREID'] . "' AND STATUS='Shipping';";
+    $query= "SELECT * FROM ORDERS WHERE STOREID='" . $_SESSION['STOREID'] . "' AND STATUS='Shipping';";
     
     $result= queryDB($query,$db);
     

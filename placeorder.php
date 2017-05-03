@@ -78,6 +78,7 @@ if (isset($_POST['submit']))
 		echo ($errorMessage);
 		echo '</div>';
 	}
+	else{
 	$_SESSION['ORDERDATE']=$newdate;
 	$_SESSION['ORDERTIME']=$ORDERTIME;
 	$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -89,6 +90,7 @@ if (isset($_POST['submit']))
 		{
 		header('Location: payment.php');exit;
 		}
+	}
 	}
 }
 ?>
