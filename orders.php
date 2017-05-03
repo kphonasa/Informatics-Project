@@ -27,6 +27,7 @@
 ?>
 <table class='table table-hover'>
 		<thead>
+			<th>Image</th>
 			<th>Order ID</th>
 			<th>Order scheduled for</th>
 			<th>Order Status</th>
@@ -43,12 +44,19 @@
 		$email=$_SESSION['email'];
 		$id=$_SESSION['id'];
 		$email=makeStringSafe($db,$email);
-		$query="SELECT * FROM ORDERS WHERE USERID=$id;";
+		$query="SELECT * FROM ORDERS,PRODUCT WHERE ORDERS.PRODUCTID=PRODUCT.ID AND USERID=$id;";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
 		{
 			echo'<tr>';
+			echo "<td>";
+			if ($row['IMAGE']) {
+            $imageLocation = $row['IMAGE'];
+            $altText = 'PRODUCT' . $row['PNAME'];
+            echo "<img src='$imageLocation' width='150' alt='$altText'>";
+			}
+			echo "</td>";
 			echo '<td>' . $row['ID'] . '</td>';
 			echo '<td>' . $row['ORDERDATE'] . '</td>';
 			echo '<td>' . $row['STATUS'] . '</td>';
