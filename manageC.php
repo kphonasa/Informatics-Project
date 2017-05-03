@@ -174,6 +174,7 @@
 			echo'<tr>';
 			echo '<td>' . $row['CNAME'] . '</td>';
 			echo "<td><a href='deleteC.php?ID=" . $row['ID']  .  "'>delete</a></td>";
+			echo "<td><a href='updateC.php?ID=" . $row['ID']  .  "'>update</a></td>";
 			echo'</tr>';
 		}
 		?>
