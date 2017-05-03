@@ -1,3 +1,4 @@
+
 <!--orders-->
 <?php
 //kicks users out if they are not logged in
@@ -7,26 +8,22 @@
 		header('Location: shopperlogin.php');
 		exit;
 	}
+	if (!isset($_SESSION['id']))
+	{
+		header('Location: shopperlogin.php');
+		exit;
+	}
 ?>
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
-
 	$title ="Orders";
 	$h1 = "Orders";
 	$menuActive=3;
 	include_once("shopperheader.php");
 ?>
 <?php 
-$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-$query = "CREATE TABLE IF NOT EXISTS TEMP(
-	ID INT NOT NULL AUTO_INCREMENT,
-	PNAME VARCHAR(128) NOT NULL,
-	PRODUCTID INT NOT NULL,
-	QTY INT NOT NULL,
-	PRICE INT NOT NULL,
-	PRIMARY KEY(ID));";
-queryDB($query, $db);
+
 ?>
 <table class='table table-hover'>
 		<thead>
@@ -38,14 +35,15 @@ queryDB($query, $db);
 
 		<!--include config and util files-->
 		<?php
-
 		//connect to the database
+		include_once('config.php');
+		include_once('dbutils.php');
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
-		$email=($_SESSION['email']);
+		$email=$_SESSION['email'];
+		$id=$_SESSION['id'];
 		$email=makeStringSafe($db,$email);
-
-		$query="(SELECT ORDERS.ID, ORDERS.ORDERDATE, ORDERS.STATUS FROM ORDERS INNER JOIN USERS1 ON ORDERS.USERID=USERS1.ID WHERE USERS1.EMAIL='" . $email . "');";
+		$query="SELECT * FROM ORDERS WHERE USERID=$id;";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
@@ -56,7 +54,6 @@ queryDB($query, $db);
 			echo '<td>' . $row['STATUS'] . '</td>';
 			echo'</tr>';
 		}
-
 		?>
 		
 	</table>
