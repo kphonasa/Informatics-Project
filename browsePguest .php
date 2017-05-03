@@ -7,6 +7,7 @@
 	$menuActive=1;
 	include_once("guestheader.php");
 ?>
+
 <?php 
 $db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 $query = "CREATE TABLE IF NOT EXISTS TEMP(
@@ -27,10 +28,10 @@ queryDB($query, $db);
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style=width: "200" name="order" data-default-value=<?php $query ?>>
 			<option selected disabled hidden>Order By:</option>
-			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">A-Z</option>
+			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">A-Z</option>
 			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME DESC;">Z-A</option>
-			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">Category</option>
-			<option value="SELECT IMAGE,PNAME,CATEGORY, PRICE FROM PRODUCT ORDER BY PRICE;">Price</option>
+			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT ORDER BY PNAME ASC;">Category</option>
+			<option value="SELECT IMAGE,PNAME, CATEGORY, PRICE FROM PRODUCT ORDER BY PRICE;">Price</option>
 	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
 	<div>
 	</div>
@@ -51,16 +52,18 @@ queryDB($query, $db);
 		//connect to the database
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
-
+		$query= "SELECT * FROM PRODUCT";
+		
 		if (isset($_POST['order'])){
 			$query = $_POST['order'];
 		} else if (isset($_POST['search'])) {
 			$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '%" . $_POST['name'] . "%';";
 		} else if (isset($_GET['CATEGORY'])) {
-				$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY = '" . $_GET['CATEGORY'] . "';";
+			$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY = '" . $_GET['CATEGORY'] . "';";
 		} else if (isset($_GET['CATEGORY'])) {
 			$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE, ID FROM PRODUCT ORDER BY PNAME ASC;";
 		}
+		
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
