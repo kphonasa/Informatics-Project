@@ -65,7 +65,7 @@ if (isset($_POST['submit']))
 	}
 
 	//get the hashed password from the user with the email that got entered
-	$query="SELECT HASHEDPASS FROM USERS1 WHERE EMAIL='" . $email . "';";
+	$query="SELECT ID,HASHEDPASS FROM USERS1 WHERE EMAIL='" . $email . "';";
 	$result=queryDB($query, $db);
 	if (nTuples($result)>0)
 	{
@@ -73,6 +73,7 @@ if (isset($_POST['submit']))
 		//get the hashed pass for the account
 		$row = nextTuple($result);
 		$hashedpass = $row['HASHEDPASS'];
+		$id=$row['ID'];
 	
 		//compare entered pass to pass in database
 		if ($hashedpass==crypt($password, $hashedpass))
@@ -80,6 +81,7 @@ if (isset($_POST['submit']))
 			if (session_start())
 			{
 				$_SESSION['email']=$email;
+				$_SESSION['id']=$id;
 				header("Location: shopperhome.php");
 				exit;
 			}
