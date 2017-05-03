@@ -107,8 +107,19 @@
 </div>
  
  
-
- 
+<?php
+    if (isset($_GET['error'])) {
+        // for successes after the form was submitted
+        echo '<div class="alert alert-danger" role="alert">';
+        echo ($_GET['error']);
+        echo '</div>';
+    } elseif (isset($_GET['successmessage'])) {
+        // for successes from another form that redirects users to this page
+        echo '<div class="alert alert-success" role="alert">';
+        echo ($_GET['successmessage']);
+        echo '</div>';        
+    }
+?>            
  
 <div class="row">
     <div class="col-xs-12">
@@ -131,10 +142,10 @@
     <div class="col-xs-12">
 
 <form action="manageC.php" method="post">
-<!--name-->
 
 
-<!--country-->
+
+<!--category-->
 <div class="form-group">
     <label for="CNAME">Name:</label>
     <input type="text" class="form-control" name="CNAME" value="<?php if($name){echo $name; } ?>"/>
