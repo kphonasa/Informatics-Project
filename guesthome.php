@@ -16,6 +16,12 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 	<style>
 		body {
 			background-image: url("https://webdev.cs.uiowa.edu/~kwang9/project/image/FoodBackground.jpg");
@@ -26,26 +32,20 @@
 	
 	<body>
 		
-		<div class="container">
-		<!--Container for all content to be displayed-->
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="page-header">
-					<!--Header-->		
-						<h1><b>Hvyee.com</b></font></h1>
-					</div>
-				</div>
-			</div>
-		</div>
+<?php
+	include_once('config.php');
+	include_once('dbutils.php');
+?>
 		
-		
+<?php
+include_once("guestheader.php")
+?>		
 			<div class="jumbotron">
 				<div class="row">
 					<div class="col-sm-9 col-xs-12">
 						<h1>Welcome to Hvyee !</h1>
-						<p><a class="btn btn-group btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-group" role="group" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>
-					</div>	
-				</div>	
+					</div>
+				</div>
 			</div>
 		
 <HR>		
