@@ -13,6 +13,11 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	
 	<style>
 		body {
@@ -24,6 +29,11 @@
 	
 </head>
 <body>
+	
+<?php
+	include_once('config.php');
+	include_once('dbutils.php');
+?>
 
 	<div class="container">
 	<!--Container for all content to be displayed-->
@@ -36,18 +46,41 @@
 			</div>
 		</div>
 	</div>
-		
-	<nav class="navbar navbar-defult">
-		<div class="container">	
-				<!--Menu-->
-				<div class="container fluid">
-					<ul class="nav nav-tabs">
-						<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
-						<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
-						<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="browseCguest.php">Browse Categories</a></li>
-						<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
-						<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUser.php">Register</a></li>
-						<li <?php if($menuActive==5){echo 'class="active"';}?>><a href="guestcart.php">Shopping Cart</a></li>
+	
+	
+	
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<nav class="navbar navbar-defult">
+				<div class="container">	
+					<!--Menu-->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav nav-tabs">
+							<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
+							<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
+							<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
+							<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUser.php">Register</a></li>
+							<li <?php if($menuActive==5){echo 'class="active"';}?>><a href="guestcart.php">Shopping Cart</a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<?php
+										include_once('config.php');
+										include_once('dbutils.php');
+										$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);											
+										// set up a query to get infor on the cars from the DB
+										$query = 'SELECT DISTINCT CATEGORY FROM PRODUCT';											
+										// run the query
+										$result = queryDB($query, $db);											
+										while($row = nextTuple($result))
+										{
+											echo "<li><a href='https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php?CATEGORY=" . $row['CATEGORY'] . "'>" . $row['CATEGORY'] . "</a></li>";	
+										}
+									?>
+								</ul>
+							</li>
+					
 						<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
 							<div class="input-group add-on">
 							  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
@@ -57,6 +90,6 @@
 						</form>
 					</ul>
 				</div>
+			</nav>
 		</div>
 	</nav>
-	
