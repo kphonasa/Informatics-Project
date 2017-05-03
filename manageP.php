@@ -143,21 +143,7 @@
     <div class="col-xs-12">
 
 <form action="manageP.php" method="post" enctype="multipart/form-data">
-<!--maker-->
 
-<div class="form-group">
-    <label for="STOREID">Storeid:</label>
-	<select class="form-control" style="width: 100" name="STOREID">
-		<?php $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-		//run the query
-	
-		$query="SELECT ID FROM STORE;";
-		$result= queryDB($query, $db);
-			
-		while($row = nextTuple($result))
-		{ echo'<option value=' . $row['ID'] . '>';echo($row['ID']); echo'</option>';}?>
-	</select>
-</div>
 <div class="form-group">
     <label for="CATEGORY">Category:</label>
         <select class="form-control" style="width: 500" name="CATEGORY">
