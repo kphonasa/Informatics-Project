@@ -22,6 +22,7 @@
 		<thead>
 			<th>Order ID</th>
 			<th>Order scheduled for</th>
+			<th></th>
 			<th>Order Status</th>
 		</thead>
 
@@ -35,7 +36,7 @@
 		$email=($_SESSION['email']);
 		$email=makeStringSafe($db,$email);
 
-		$query="(SELECT ORDERS.ID, ORDERS.ORDERDATE, ORDERS.STATUS FROM ORDERS INNER JOIN USERS1 ON ORDERS.USERID=USERS1.ID WHERE USERS1.EMAIL='" . $email . "');";
+		$query="(SELECT ORDERS.ID, ORDERS.ORDERDATE, ORDERS.ORDERTIME, ORDERS.STATUS FROM ORDERS INNER JOIN USERS1 ON ORDERS.USERID=USERS1.ID WHERE USERS1.EMAIL='" . $email . "');";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
@@ -43,6 +44,7 @@
 			echo'<tr>';
 			echo '<td>' . $row['ID'] . '</td>';
 			echo '<td>' . $row['ORDERDATE'] . '</td>';
+			echo '<td>' . $row['ORDERTIME'] . '</td>';
 			echo '<td>' . $row['STATUS'] . '</td>';
 			echo'</tr>';
 		}
