@@ -64,7 +64,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1
 			<!--Menu-->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav nav-tabs">
-					<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php"><?php echo $_SESSION['STORE']; ?></a></li>
+					<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
 					<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
 					<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
 					<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="shopperlogin.php">Log in</a></li>
