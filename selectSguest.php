@@ -1,14 +1,28 @@
 <?php
+
+
+	$cookie_name = "user";
+	$cookie_value = "John Doe";
+	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+
 	include_once('config.php');
 	include_once('dbutils.php');
-?>
-<?php
-// this kicks users out if they are not logged in
-    session_start();
-    if (!isset($_SESSION['COOKIE'])) {
-        header('Location: guesthome.php');
-        exit;
-    }
+	$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
+	//$cookie=$_POST['COOKIE'];
+	
+	if (!isset($_COOKIE[$cookie_name]))
+	{
+		$query="INSERT INTO TEMP(COOKIE) VALUES ('" . $cookie_value . "')";
+		queryDB($query, $db);
+	}
+	else
+	{
+		$query="UPDATE  TEMP SET COOKIE='" . $cookie_value . "'";
+		queryDB($query, $db);
+	}
+	
+	$_SESSION['COOKIE']=$_COOKIE[$cookie_name];
+	
 ?>
 	
 <div class="container">
