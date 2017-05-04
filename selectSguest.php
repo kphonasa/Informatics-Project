@@ -1,32 +1,11 @@
 <?php
-
-
-	$cookie_name = "user";
-	$cookie_value = "John Doe";
-	setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-
 	include_once('config.php');
 	include_once('dbutils.php');
-	$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-	//$cookie=$_POST['COOKIE'];
-	
-	if (!isset($_COOKIE[$cookie_name]))
-	{
-		$query="INSERT INTO TEMP(COOKIE) VALUES ('" . $cookie_value . "')";
-		queryDB($query, $db);
-	}
-	else
-	{
-		$query="UPDATE  TEMP SET COOKIE='" . $cookie_value . "'";
-		queryDB($query, $db);
-	}
-	
-	$_SESSION['COOKIE']=$_COOKIE[$cookie_name];
-	
 ?>
+
 	
 <div class="container">
-<form action="selectS.php" method="post">
+<form action="selectSguest.php" method="post">
 <!--maker-->
 <div class="form-group">
     <label for="STORE">Select Store:</label>
@@ -42,6 +21,12 @@
 		{ echo'<option value=' . $row['ID'] . '>'; echo($row['NAME']); echo'</option>';}?>
 		</select>
 </div>
+		
+<div class="form-group">
+	<label for="COOKIE">Enter the name you would like to use:</label>
+	<input type="text" style="width: 500" class="form-control" name="COOKIE"/>
+</div>
+
 <div>
 	<button type="submit" class="btn-btn-default" name="submit">Select</button>
 </div>
@@ -50,10 +35,38 @@
 <?php
 if (isset($_POST['submit']))
 {
+	$isComplete = true;
+	$errorMessage="";
+	if (!$_POST['COOKIE'])
+	{
+		$errorMessage .="Please write a name.";
+		$isComplete = false;
+	}
+	$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
+	// set up a query to get infor on the cars from the DB
+	$query = "SELECT * FROM TEMP WHERE COOKIE='" . $_POST['COOKIE'] . "';";
+	// run the query
+	$result = queryDB($query, $db);
+	if (nTuples($result) == 0) 
+	{$isComplete = true;}
+	else {$errorMessage .="Please choose a name; name currently in use.";
+		$isComplete = false;}
+	if ($isComplete){
 	if (session_start())
+	{
+		//$cookie_name = "user";
+		//$cookie_value = $_POST['COOKIE'];
+		//setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+		//$cookie_value=$_SESSION['COOKIE'];
+		$_SESSION['COOKIE']=$_POST['COOKIE'];
+		$_SESSION['STORE']=$_POST['STORE'];
+		header("Location: guesthome.php");
+	exit;}}
+	if(isset($isComplete) && !$isComplete)
 			{
-				$_SESSION['STORE']=$_POST['STORE'];
-				header("Location: guesthome.php");
-			exit;}
+				echo '<div class="alert alert-danger" role="alert">';
+				echo ($errorMessage);
+				echo '</div>';
+			}
 }
 ?>

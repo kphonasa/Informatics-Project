@@ -23,17 +23,6 @@
 	include_once("shopperheader.php");
 ?>
 
-<?php 
-$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-$query = "CREATE TABLE IF NOT EXISTS TEMP(
-	ID INT NOT NULL AUTO_INCREMENT,
-	PNAME VARCHAR(128) NOT NULL,
-	PRODUCTID INT NOT NULL,
-	QTY INT NOT NULL,
-	PRICE INT NOT NULL,
-	PRIMARY KEY(ID));";
-queryDB($query, $db);
-?>
 <div class="container">
 <h1>Your Shopping Cart</h1>
 <table class='table table-hover'>
@@ -51,7 +40,7 @@ queryDB($query, $db);
 		//connect to the database
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
-		$query="(SELECT * FROM TEMP);";
+		$query="(SELECT * FROM TEMP WHERE EMAIL='" . $_SESSION['email'] . "');";
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
@@ -80,10 +69,12 @@ queryDB($query, $db);
 		<?php 
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the query
-		$queryx="SELECT SUM(QTY*PRICE) AS GRAND_TOTAL FROM TEMP;";
+		$queryx="SELECT SUM(QTY*PRICE) AS GRAND_TOTAL FROM TEMP WHERE EMAIL='" . $_SESSION['email'] . "';";
 		$resultx= queryDB($queryx, $db);
 		while($row = nextTuple($resultx))
-		{echo '<tr><td>';echo "$"; echo $row['GRAND_TOTAL']; echo '</tr></td>';}
+		{if (session_start())
+		{$_SESSION['TOTALP']=$row['GRAND_TOTAL'];}
+		echo '<tr><td>';echo "$"; echo $row['GRAND_TOTAL']; echo '</tr></td>';}
 		?>
 	</table>
 		<div class="container">

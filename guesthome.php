@@ -5,6 +5,11 @@
 		header('Location: selectSguest.php');
 		exit;
 	}
+	if (!isset($_SESSION['COOKIE']))
+	{
+		header('Location: selectSguest.php');
+		exit;
+	}
 ?>
 <?php
 	include_once('config.php');
@@ -79,8 +84,8 @@ include_once("guestheader.php")
 								{$imagelocation=$row['IMAGE'];
 								$altText="product" . $row['PNAME'];
 								echo '<div class="col-xs-3 col-md-3">';
-								echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'><BR>";}
-								echo "<a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a>";
+								echo "<a href='Descriptionguest.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'><BR>";}
+								echo "<a href='Descriptionguest.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a>";
 								echo '</div>';
 							}
 						?>
@@ -96,4 +101,3 @@ include_once("guestheader.php")
 	include_once("footer.php");
 ?>
 Contact GitHub API Training Shop Blog About
-

@@ -2,14 +2,14 @@
 <?php
 //kicks users out if they are not logged in
 	session_start();
-	if (!isset($_SESSION['email']))
+	if (!isset($_SESSION['COOKIE']))
 	{
-		header('Location: shopperlogin.php');
+		header('Location: selectSguest.php');
 		exit;
 	}
 		if (!isset($_SESSION['STORE']))
 	{
-		header('Location: selectS.php');
+		header('Location: selectSguest.php');
 		exit;
 	}
 ?>
@@ -20,10 +20,10 @@
 	$title ="Shopping Cart";
 	$h1 = "Shopping Cart";
 	$menuActive=5;
-	include_once("shopperheader.php");
+	include_once("guestheader.php");
 ?>
 <div class="container">
-<form method="post" action="placeorder.php">
+<form method="post" action="placeorderguest.php">
 <div class="form-group">
   Day for delivery (can at most be done a week in advance):
   <input type="date" name="ORDERDATE">
@@ -86,26 +86,15 @@ if (isset($_POST['submit']))
 	}
 	else{
 
-	$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-	$query="SELECT * FROM USERS1 WHERE EMAIL='" . $_SESSION['email'] . "';";
-	$result = queryDB($query, $db);
-	while($row = nextTuple($result))
-	{
-		if (session_start())
+	if (session_start())
 	{
 		$_SESSION['D']=$newdate;
 		$_SESSION['T']=$ORDERTIME;
 	}
-		if (!$row['CARDNAME'])
-		{
-		header('Location: payment.php');exit;
-		}
-		else {header ('Location: process2.php');exit;}
+	header ('Location: processguest.php');exit;
 	}
-	}
-	
 }
 if (isset($_POST['back']))
-	{header('Location: cart.php');
+	{header('Location: guestcart.php');
 	exit;} 
 ?>
