@@ -1,9 +1,5 @@
 <?php
-/*
- * This php file enables users to edit a particular pizza
- * It obtains the id for the pizza to update from an id variable passed using the GET method (in the url)
- *
- */
+
     include_once('config.php');
     include_once('dbutils.php');
     session_start();
@@ -12,21 +8,16 @@
         header('Location: stafflogin.php');
         exit;
     }
-    /*
-     * If the user submitted the form with updates, we process the form with this block of code
-     *
-     */
+    
     if (isset($_POST['submit'])) {
-        // process the update if the form was submitted
-        
-        // get data from form
+       
         $id = $_POST['ID'];
         if (!isset($id)) {
-            // if for some reason the id didn't post, kick them back to pizza.php
+            
             header('Location: manageP.php');
             exit;
         }
-        // get data from form
+        
         $pname = $_POST['PNAME'];
         $description = $_POST['DESCRIPTION'];
         $price = $_POST['PRICE'];
@@ -53,10 +44,7 @@
         if($isComplete) {
             // if there's no error, then we need to update
             
-            //
-            // first update pizza record
-            //
-            // put together SQL statement to update pizza
+            
             $query = "UPDATE PRODUCT SET PNAME='$pname', DESCRIPTION='$description', PRICE=$price, QTY=$qty WHERE ID=$id;";
             
             // connect to the database
@@ -93,22 +81,18 @@
             exit;
         }        
     } else {
-        //
-        // if the form was not submitted (first time in)
-        //
+        
     
         
          if(!isset($_GET['ID'])) {
             // if the id was not passed through the url
             
-            // send them out to pizza.php and stop executing code in this page
+            
             header('Location: manageP.php');
             exit;
         }
         
-        /*
-         * Now we'll check to make sure the id passed through the GET variable matches the id of a pizza in the database
-         */
+        
         
         // connect to the database
         $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
@@ -121,18 +105,16 @@
         // run the query
         $result = queryDB($query, $db);
         
-        // if the id is not in the pizza table, then we need to send the user back to pizza.php
+        
         if (nTuples($result) == 0) {
-            // send them out to pizza.php and stop executing code in this page
+            
             header('Location: manageP.php');
             exit;
         }
         
-        /*
-         * Now we know we got a valid pizza id through the GET variable
-         */
         
-        // get data on pizza to fill out form with existing values
+        
+        
         $row = nextTuple($result);
         
         $pname = $row['PNAME'];
@@ -190,7 +172,7 @@
 
 
 
-<!-- form to update pizza -->
+
 <div class="row">
     <div class="col-xs-12">
         
