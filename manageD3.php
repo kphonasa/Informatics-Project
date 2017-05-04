@@ -69,7 +69,6 @@
     <thead>
         <th>OrderID</th>
         <th>UserID</th>
-        <th>ProductID</th>
         <th>OrderDate</th>
 		<th>Status</th>
         <th>TotalPrice</th>
@@ -81,7 +80,7 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= "SELECT ID, USERID,PRODUCTID,ORDERDATE,STATUS,TOTALP FROM ORDERS WHERE STOREID='" . $_SESSION['STOREID'] . "' AND STATUS='Delivered';";
+    $query= "SELECT ID, USERID,ORDERDATE,STATUS,TOTALP FROM ORDERS WHERE STOREID='" . $_SESSION['STOREID'] . "' AND STATUS='Delivered';";
     
     $result= queryDB($query,$db);
     
@@ -90,7 +89,6 @@
         echo "\n <tr>";
         echo "<td>" . $row['ID'] . "</td>";
         echo "<td>" . $row['USERID'] . "</td>";
-        echo "<td>" . $row['PRODUCTID'] . "</td>";
         echo "<td>" . $row['ORDERDATE'] . "</td>";
 		echo "<td>" . $row['STATUS'] . "</td>";
 		echo "<td>" . $row['TOTALP'] . "</td>";
