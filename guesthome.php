@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	if (!isset($_SESSION['STORE']))
 	{
 		header('Location: selectSguest.php');
