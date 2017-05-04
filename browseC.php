@@ -22,17 +22,7 @@
 	$menuActive=2;
 	include_once("shopperheader.php");
 ?>
-<?php 
-$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-$query = "CREATE TABLE IF NOT EXISTS TEMP(
-	ID INT NOT NULL AUTO_INCREMENT,
-	PNAME VARCHAR(128) NOT NULL,
-	PRODUCTID INT NOT NULL,
-	QTY INT NOT NULL,
-	PRICE INT NOT NULL,
-	PRIMARY KEY(ID));";
-queryDB($query, $db);
-?>
+
 	<div class="col-xs-6">
 		<div class="col-xs-12">
 			<div id="container">
