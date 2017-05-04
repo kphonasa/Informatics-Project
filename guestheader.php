@@ -57,7 +57,7 @@
 					<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
 					<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
 					<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
-					<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="inputUser.php">Register</a></li>
+					<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="shopperlogin.php">Log in</a></li>
 					<li <?php if($menuActive==5){echo 'class="active"';}?>><a href="guestcart.php">Shopping Cart</a></li>
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
