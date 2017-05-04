@@ -14,7 +14,6 @@
 <?php
 include_once('config.php');
 include_once('dbutils.php');
-
 $title ="Category";
 $h1 = "Category";
 $menuActive=2;

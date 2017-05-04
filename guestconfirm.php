@@ -20,9 +20,10 @@
 	$h1 = "Shopping Cart";
 	$menuActive=5;
 	include_once("guestheader.php");
-	$query="SELECT MAX(ID) FROM ORDERS;";
+	$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
+	$query="SELECT COUNT(ID) FROM ORDERS;";
 			$result=queryDB($query, $db);
 			while($row = nextTuple($result))
-			{$row['ID']=$_SESSION['CONFIRM'];}
-	echo '<div><strong> <p>';echo "Thank you for your purchase! Your confirmation number is:"; echo (number_format($row['ID'])); echo '</p></strong></div>';
+			{$row['ID']=$_SESSION['CONFIRM'];
+				echo '<div><strong> <p>';echo "Thank you for your purchase! Your confirmation number is:"; echo ($row['COUNT(ID)']); echo '</p></strong></div>';}	
 ?>

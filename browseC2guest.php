@@ -28,9 +28,9 @@ $CID=$_GET['ID'];
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
 		<option selected disabled hidden>Order By:</option>
-		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
-		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
-		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PRICE;">Price</option>
+		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($CID); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
+		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($CID); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
+		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($CID); ?> ORDER BY PRODUCT.PRICE;">Price</option>
 	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
 	</form>
 	</div>
@@ -68,9 +68,9 @@ $CID=$_GET['ID'];
 			if ($row['IMAGE'])
 			{$imagelocation=$row['IMAGE'];
 			$altText="product" . $row['PNAME'];
-			echo "<a href='Description2.php?ID=" . $row['ID'] . "CID=" . $CID . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
+			echo "<a href='Descriptionguest.php?ID=" . $row['ID'] . "CID=" . $CID . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
 			echo'</td>';
-			echo "<td><a href='Description2.php?ID=" . $row['ID'] . "CID=" . $CID . "'>" . $row['PNAME'] . "</a></td>";
+			echo "<td><a href='Descriptionguest.php?ID=" . $row['ID'] . "CID=" . $CID . "'>" . $row['PNAME'] . "</a></td>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
 			//echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseC2.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
@@ -80,7 +80,7 @@ $CID=$_GET['ID'];
 			
 			$_SESSION['QTY']=$QTY;
 			$_SESSION['ID']=$_GET['ID'];
-			header('Location: browseC3.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . 'CID=' . $CID . '');
+			header('Location: browseC3guest.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . 'CID=' . $CID . '');
 			//exit;
 			}
 			
