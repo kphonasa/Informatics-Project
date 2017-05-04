@@ -77,7 +77,7 @@ if (isset($_POST['submit']))
 				
 				$_SESSION['EMAIL']=$email;
 				$_SESSION['STOREID']=$storeid;
-				header("Location: staffhome.php");
+				header("Location: manageP.php");
 				exit;
 			}
 			else{punt("Unable to start seesion when logged in.");}

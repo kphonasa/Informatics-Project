@@ -33,7 +33,6 @@
 				<!--Menu-->
 					<div class="container fluid">
 					<ul class="nav nav-pills">
-						<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="staffhome.php">Home</a></li>
 						<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="manageP.php">Products</a></li>
 						<li <?php if($menuActive==2){echo 'class="active"';}?>><a href="manageC.php">Categories</a></li>
 						<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="manageD.php">Deliveries</a></li>

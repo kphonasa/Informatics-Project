@@ -26,7 +26,11 @@
 			<div class="jumbotron">
 				<div class="row">
 					<div class="col-sm-9 col-xs-12">
-						<h1>Welcome to Hvyee !</h1>
+						<h1>Welcome to <?php $query = "SELECT NAME FROM STORE WHERE ID='" . $_SESSION['STORE'] . "';";
+						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName); 
+						$result = queryDB($query, $db);
+						while($row = nextTuple($result))
+							{echo $row['NAME'];}?>  !</h1>
 					</div>	
 				</div>	
 			</div>
