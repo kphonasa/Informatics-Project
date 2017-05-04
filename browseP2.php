@@ -30,7 +30,7 @@
 	$db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 	$solution=queryDB($queryx,$db);
 	while($row = nextTuple($solution)){
-		$query="INSERT INTO TEMP(PNAME, PRODUCTID, QTY, PRICE) VALUES ('" . $row['PNAME'] . "','" . $ID . "','" . $QTY . "','" . $row['PRICE'] . "');";
+		$query="INSERT INTO TEMP(PNAME, PRODUCTID, QTY, PRICE, EMAIL) VALUES ('" . $row['PNAME'] . "','" . $ID . "','" . $QTY . "','" . $row['PRICE'] . "','" . $_SESSION['email'] . "');";
 		//get a handle to database
 		$db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//run the insert statement

@@ -23,7 +23,7 @@
 	include_once("shopperheader.php");
 ?>
 <?php 
-$ID=$_GET['ID'];
+$CID=$_GET['ID'];
 ?>
 	<div class="col-xs-6">
 		<div class="col-xs-12">
@@ -33,9 +33,9 @@ $ID=$_GET['ID'];
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
 		<option selected disabled hidden>Order By:</option>
-		<option value="SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
-		<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
-		<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PRICE;">Price</option>
+		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
+		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
+		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($ID); ?> ORDER BY PRODUCT.PRICE;">Price</option>
 	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
 	</form>
 	</div>
@@ -49,8 +49,8 @@ $ID=$_GET['ID'];
 			<th>Product</th>
 			<th>Category</th>
 			<th>Price</th>
-			<th>Quantity</th>
-			<th>Add to Cart</th>
+			<!--<th>Quantity</th>
+			<th>Add to Cart</th>-->
 		</thead>
 		<!--include config and util files-->
 		<?php
@@ -62,8 +62,8 @@ $ID=$_GET['ID'];
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
 		else if (isset($_POST['search']))
-		{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $ID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
-		else{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $ID . "' ORDER BY PRODUCT.PNAME ASC;";}
+		{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
+		else{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' ORDER BY PRODUCT.PNAME ASC;";}
 	
 		$result= queryDB($query, $db);
 				
@@ -76,20 +76,20 @@ $ID=$_GET['ID'];
 			if ($row['IMAGE'])
 			{$imagelocation=$row['IMAGE'];
 			$altText="product" . $row['PNAME'];
-			echo "<a href='Description2.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
+			echo "<a href='Description2.php?ID=" . $row['ID'] . "CID=" . $CID . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
 			echo'</td>';
-			echo "<td><a href='Description2.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+			echo "<td><a href='Description2.php?ID=" . $row['ID'] . "CID=" . $CID . "'>" . $row['PNAME'] . "</a></td>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
-			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseC2.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
-			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
+			//echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseC2.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			//echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
 			if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			
 			$_SESSION['QTY']=$QTY;
 			$_SESSION['ID']=$_GET['ID'];
-			header('Location: browseC3.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . '');
-			exit;
+			header('Location: browseC3.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . 'CID=' . $CID . '');
+			//exit;
 			}
 			
 			

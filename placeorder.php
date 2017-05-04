@@ -57,8 +57,8 @@ if (isset($_POST['submit']))
 	}
 	$start = strtotime('08:00');
 	$end = strtotime('20:00');
-
-	if($ORDERTIME >= $start && $ORDERTIME <= $end) 
+	
+	if((strtotime($ORDERTIME) >= $start) && (strtotime($ORDERTIME) <= $end) )
 	{
 		$ORDERTIME=$ORDERTIME;
 	} 
@@ -82,21 +82,25 @@ if (isset($_POST['submit']))
 	{
 		echo '<div class="alert alert-danger" role="alert">';
 		echo ($errorMessage);
-		echo $ORDERTIME;
 		echo '</div>';
 	}
 	else{
-	$_SESSION['ORDERDATE']=$newdate;
-	$_SESSION['ORDERTIME']=$ORDERTIME;
+
 	$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 	$query="SELECT * FROM USERS1 WHERE EMAIL='" . $_SESSION['email'] . "';";
 	$result = queryDB($query, $db);
 	while($row = nextTuple($result))
 	{
+		if (session_start())
+	{
+		$_SESSION['D']=$newdate;
+		$_SESSION['T']=$ORDERTIME;
+	}
 		if (!$row['CARDNAME'])
 		{
-		header('Location: payment.php');exit;
+		header('Location: payment.php?D=' . $newdate . 'T=' . $ORDERTIME . '');exit;
 		}
+		else {header ('Location: process.php?D=' . $newdate . 'T=' . $ORDERTIME . '');exit;}
 	}
 	}
 	

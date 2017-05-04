@@ -23,8 +23,8 @@
 ?>
 <?php 
 $ID=$_GET['ID'];
+$CID=$_GET['CID'];
 
-if (!isset($_GET['ID'])){header ('Location:browseP.php'); exit;}
 $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 $query = "SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.ID='" . $ID . "';";
 $result=queryDB($query, $db);
@@ -64,20 +64,21 @@ $PRICE=$row['PRICE'];
 	</div>
 </div>
 <div align="middle">
-<form method="post" action="Description2.php?ID=<?php echo $ID ?>"><input type="text" name="quantity" size="2"/> 
+<form method="post" action="Description2.php?ID=<?php echo ($ID); ?>CID=<?php echo ($CID); ?>"><input type="text" name="quantity" size="2"/> 
 	<button type ="submit" class="btn btn-default" name="Add">Add to Cart</button>
 	<button type ="submit" class="btn btn-default" name="back">Go Back</button>
 </form>
 </div>
 <?php if (isset($_POST['back']))
-	{header('Location: browseC2.php?ID=' . $ID . '');
+	{header('Location: browseC2.php?ID=' . $CID . '');
 	exit;} 
 	if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			
 			$_SESSION['QTY']=$QTY;
-			$_SESSION['ID']=$ID;
-			header('Location: browseC2.php?ID=' . $ID . 'QTY=' . $QTY . '');
+			$_GET['ID']=$ID;
+			$_GET['CID'];
+			header('Location: browseC3.php?ID=' . $ID . 'QTY=' . $QTY . 'CID=' . $CID . '');
 			exit;
 			}
 ?>

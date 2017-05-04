@@ -32,10 +32,10 @@
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
 			<option selected disabled hidden>Order By:</option>
-			<option value="SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
-			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
-			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY CATEGORY.CNAME ASC;">Category</option>
-			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PRICE;">Price</option>
+			<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
+			<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
+			<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY CATEGORY.CNAME ASC;">Category</option>
+			<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PRICE;">Price</option>
 	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
 	<div>
 	</div>
@@ -47,8 +47,8 @@
 			<th>Product</th>
 			<th>Category</th>
 			<th>Price</th>
-			<th>Quantity</th>
-			<th>Add to Cart</th>
+			<!--<th>Quantity</th>
+			<th>Add to Cart</th>-->
 		</thead>
 		<!--include config and util files-->
 		<?php
@@ -60,8 +60,8 @@
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
 		else if (isset($_POST['search']))
-		{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
-		else{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' ORDER BY PRODUCT.PNAME ASC;";}
+		{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
+		else{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT,CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' ORDER BY PRODUCT.PNAME ASC;";}
 		$result= queryDB($query, $db);
 				
 		while($row = nextTuple($result))
@@ -76,10 +76,10 @@
 			echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
 			echo'</td>';
 			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-			echo '<td>' . $row['CATEGORY'] . '</td>';
+			echo '<td>' . $row['CNAME'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
-			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
-			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
+			//echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?ID=" . $row['ID'] . "QTY=" . $QTY . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			//echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
 			if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			

@@ -79,13 +79,13 @@
 						</ul>
 					</li>
 				
-					<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
+					<!--<form action="get.php" method="get" class="navbar-form navbar-right" role="search">
 						<div class="input-group add-on">
 						  <input class="form-control" placeholder="Search for our products" name="srch-term" id="srch-term" type="text">
 							<div class="input-group-btn">
 							<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>							  </div>
 						</div>
-					</form>
+					</form>-->
 				</ul>
 			</div>
 		</div>

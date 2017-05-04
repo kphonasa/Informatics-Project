@@ -26,7 +26,7 @@ $ID=$_GET['ID'];
 
 if (!isset($_GET['ID'])){header ('Location:browseP.php'); exit;}
 $db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-$query = "SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.ID='" . $ID . "';";
+$query = "SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.ID='" . $ID . "';";
 $result=queryDB($query, $db);
 $row=nextTuple($result);
 $PNAME=$row['PNAME'];
