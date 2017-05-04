@@ -23,7 +23,7 @@ $CID=$_GET['ID'];
 	<div class="col-xs-6">
 		<div class="col-xs-12">
 			<div id="container">
-			<form action = "browseC2guest.php?ID=<?php echo ($ID); ?>" method="post">
+			<form action = "browseC2guest.php?ID=<?php echo ($CID); ?>" method="post">
 			<input  type="text" name="name"> 
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
@@ -55,7 +55,7 @@ $CID=$_GET['ID'];
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
 		else if (isset($_POST['search']))
-		{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
+		{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.CATEGORYID='" . $CID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
 		else{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' ORDER BY PRODUCT.PNAME ASC;";}
 	
 		$result= queryDB($query, $db);
