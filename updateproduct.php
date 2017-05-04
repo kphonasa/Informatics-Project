@@ -31,6 +31,7 @@
         $description = $_POST['DESCRIPTION'];
         $price = $_POST['PRICE'];
         $qty = $_POST['QTY'];
+        $image=$_POST['IMAGE'];
         
         
         
@@ -56,20 +57,38 @@
             // first update pizza record
             //
             // put together SQL statement to update pizza
-            $query = "UPDATE PRODUCT SET PNAME='$pname', DESCRIPTION='$description', PRICE=$price WHERE ID=$id;";
+            $query = "UPDATE PRODUCT SET PNAME='$pname', DESCRIPTION='$description', PRICE=$price, QTY=$qty WHERE ID=$id;";
             
             // connect to the database
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
             
             // run the update
-            $result = queryDB($query, $db);            
+            $result = queryDB($query, $db);
+            
+            if ($_FILES['IMAGE']['size'] > 0) {
+            // if there is a picture
+            
+            // copy image to images directory
+            $tmpName = $_FILES['IMAGE']['tmp_name'];
+            $fileName = $_FILES['IMAGE']['name'];
+            
+            $newFileName = $imagesDir . $productid . $fileName;
+            
+            // we create a filename that includes the product id, followed by the filename ($imagesDir comes from config.php)
+            if (move_uploaded_file($tmpName, $newFileName)) {
+                // since we successfully copied the file, we now enter its filename in the product table
+                $query = "UPDATE PRODUCT SET IMAGE = '$newFileName' WHERE id=$productid;";
+            
+                // run insert query
+                queryDB($query, $db);
+            } else {
+                echo "error copying image";
+            }
+    	}
                     
-            //
-            // now we need to update the toppings
-            //
             
             
-            // now that we are done, send user back to pizza.php and exit 
+            
             header("Location: manageP.php?successmessage=Successfully updated");
             exit;
         }        
@@ -78,10 +97,7 @@
         // if the form was not submitted (first time in)
         //
     
-        /*
-         * Check if a GET variable was passed with the id for the pizza
-         *
-         */
+        
          if(!isset($_GET['ID'])) {
             // if the id was not passed through the url
             
@@ -143,7 +159,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>        
         
-        <title>Update profile <?php echo $pname; ?></title>
+        <title>Update Product <?php echo $pname; ?></title>
     </head>
     
     <body>
@@ -200,7 +216,10 @@
     <input type="text" class="form-control" name="QTY" value="<?php if($qty) { echo $qty; } ?>"/>
 </div>
 
-
+ <div class="form-group">
+    <label for="IMAGE">Picture of product</label>
+    <input type="file" style="width: 500" class="form-control" name="IMAGE"/>
+</div>
 
 <!-- hidden id (not visible to user, but need to be part of form submission so we know which pizza we are updating -->
 <input type="hidden" name="ID" value="<?php echo $id; ?>"/>
