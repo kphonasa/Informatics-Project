@@ -14,12 +14,16 @@
 
 <?php
 /*
- * This php file prompts users on whether they want to delete a particular pizza
- * It obtains the id for the pizza to delete from an id variable passed using the GET method (in the url)
+ * This php file prompts users on whether they want to delete a particular category
+ * It obtains the id for the Category to delete from an id variable passed using the GET method (in the url)
  *
  */
     include_once('config.php');
     include_once('dbutils.php');
+	$title ="Categories";
+	$h1 = "Categories";
+	$menuActive=2;
+	include_once("staffHeader.php");
     
     /*
      * If the user just made a decision on a deletion by using the form below, we process that below
@@ -27,24 +31,34 @@
      */
     $id = $_GET['ID'];
     $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-    $category="SELECT CNAME FROM CATEGORY WHERE ID=$id;";
-    $r=queryDB($category, $db);
-    $number="SELECT COUNT(*) FROM PRODUCT WHERE CATEGORY='$r';";
-    $nr=queryDB($number, $db);
     
     
-    if($nr>0){
-        header('Location: manageC.php');
-        echo $nr;
+	
+    $query="SELECT COUNT(*) FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND CATEGORY.ID=$id;";
+    $result=queryDB($query, $db);
+	$row=nextTuple($result);
+	$n=$row['COUNT(*)'];
+	var_dump($row);
+	
+	
+    
+    
+    if($n>0){
+        header("Location: manageC.php?error=cann not delete");
+        
         exit;   
     }
-    
+
+	include_once('config.php');
+    include_once('dbutils.php');
+	
     if (isset($_POST['submit'])) {
         // process the deletion (if selected) if the form below was submitted        
         
         // get data from form
         $id = $_POST['id'];
         $delete = $_POST['delete'];
+		
         
         if ($delete == 'yes') {
             // if the user said yes to delete, we need to delete the pizza with id = $id
@@ -52,17 +66,17 @@
             // connect to the database
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
             
-            // first delete any pizzatopping records that point to this pizza
+            //query
             $query = "DELETE FROM CATEGORY WHERE ID=$id;";
             
-            // run the delete statement to remove pizzatopping records that point to this pizza
+            // run 
             queryDB($query, $db);
             
            
         }
         
-        // send user back to pizza.php and exit 
-        header('Location: manageC.php');
+        // send user back to exit 
+        header("Location: manageC.php");
         exit;
     }
     
@@ -94,21 +108,20 @@
     // run the query
     $result = queryDB($query, $db);
     
-    // if the id is not in the pizza table, then we need to send the user back to pizza.php
+    // if the id is not in the Category table, then we need to send the user back to manageC.php
     if (nTuples($result) == 0) {
         // send them out to pizza.php and stop executing code in this page
         header('Location: manageC.php');
         exit;
     }
     
-    /*
-     * Now we know we got a valid pizza id through the GET variable
-     */
     
-    // get some data from the pizza table to ask a better question when confirming deletion
+    
+    // get some data from the Category table to ask a better question when confirming deletion
     $row = nextTuple($result);
     
-    $name = $row['CNAME'];    
+    $name = $row['CNAME'];
+	
 ?>
 
 <html>
