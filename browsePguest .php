@@ -1,3 +1,20 @@
+<!--browse products-->
+<?php
+//kicks users out if they are not logged in
+	session_start();
+	if (!isset($_SESSION['COOKIE']))
+	{
+		header('Location: guesthome.php');
+		exit;
+	}
+	if (!isset($_SESSION['STORE']))
+	{
+		header('Location: selectSguest.php');
+		exit;
+	}
+?>
+
+
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
