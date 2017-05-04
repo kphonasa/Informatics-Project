@@ -65,7 +65,7 @@ if (isset($_POST['submit']))
 	}
 
 	//get the hashed password from the user with the email that got entered
-	$query="SELECT ID,HASHEDPASS FROM USERS1 WHERE EMAIL='" . $email . "';";
+	$query="SELECT HASHEDPASS FROM USERS1 WHERE EMAIL='" . $email . "';";
 	$result=queryDB($query, $db);
 	if (nTuples($result)>0)
 	{
@@ -73,7 +73,6 @@ if (isset($_POST['submit']))
 		//get the hashed pass for the account
 		$row = nextTuple($result);
 		$hashedpass = $row['HASHEDPASS'];
-		$id=$row['ID'];
 	
 		//compare entered pass to pass in database
 		if ($hashedpass==crypt($password, $hashedpass))
@@ -81,8 +80,7 @@ if (isset($_POST['submit']))
 			if (session_start())
 			{
 				$_SESSION['email']=$email;
-				$_SESSION['id']=$id;
-				header("Location: shopperhome.php");
+				header("Location: selectS.php");
 				exit;
 			}
 			else{punt("Unable to start seesion when logged in.");}
@@ -103,12 +101,12 @@ if (isset($_POST['submit']))
 <form action="shopperlogin.php" method="post">
 	<div class="form-group">
 		<label for="email">Email</label>
-		<input type="email" class="form-control" name="email"/>
+		<input type="email" style="width: 500" class="form-control" name="email"/>
 	</div>
 	
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="password" class="form-control" name="password"/>
+		<input type="password" style="width: 500" class="form-control" name="password"/>
 	</div>
 	
 	<button type="submit" class="btn btn-default" name="submit">Login</button>
@@ -118,7 +116,7 @@ if (isset($_POST['submit']))
 	</div>
 <p>Set up an account <a href="inputUser.php"> here</a>.</p>
 <p>Continue as guest <a href="guesthome.php"> here</a>.</p>
-<p>Temporary bypass <a href="shopperhome.php"> here</a>.</p>
+
 
 	</body>
 
