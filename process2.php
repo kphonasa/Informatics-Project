@@ -21,11 +21,6 @@
 	$h1 = "Shopping Cart";
 	$menuActive=5;
 	include_once("shopperheader.php");
-	if(!$_SESSION['CARDNAME'])
-	{
-		header('Location: process2.php');
-		exit;
-	}
 
 $db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 $query="SELECT * FROM USERS1 WHERE EMAIL='" . $_SESSION['email'] . "';";
@@ -40,7 +35,11 @@ while($row = nextTuple($result))
 	$USSTATE=$row['USSTATE'];
 	$ZIP=$row['ZIP'];
 	$PHONE=$row['PHONE'];
-	
+	$CARDNAME=$row['CARDNAME'];
+	$CARDNUMBER=$row['CARDNUMBER'];
+	$EXMONTH=$row['EXMONTH'];
+	$EXYEAR=$row['EXYEAR'];
+	$CCV=$row['CCV'];
 }
 
 $db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -48,9 +47,9 @@ $db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 	STOREID, ORDERDATE, ORDERTIME, CARDNAME, CARDNUMBER, EXMONTH, EXYEAR, CCV, STATUS, TOTALP) VALUES ('" . $USERID . "', '" . $FNAME . "', 
 	'" . $LNAME . "', '" . $STREET . "', '" . $CITY . "', '" . $USSTATE . "', '" . $ZIP . "', 
 	'" . $PHONE . "', '" . $_SESSION['STORE'] . "', '" . $_SESSION['D'] . "', 
-	'" . $_SESSION['T'] . "', '" . $_SESSION['CARDNAME'] . "', '" . $_SESSION['CARDNUMBER'] . "',
-	'" . $_SESSION['EXMONTH'] . "', '" . $_SESSION['EXYEAR'] . "', '" . $_SESSION['CCV'] . "', 
-	'ORDER PLACED', '" . $_SESSION['TOTALP'] . "') ;";
+	'" . $_SESSION['T'] . "', '" . $CARDNAME . "', '" . $CARDNUMBER . "',
+	'" . $EXMONTH . "', '" . $EXYEAR . "', '" . $CCV . "', 
+	'ORDER PLACED', '" . $_SESSION['TOTALP'] . "') ;";;
 	queryDB($queryx, $db);
 	$remove="DELETE FROM TEMP WHERE EMAIL='" . $_SESSION['email'] . "';";
 	queryDB($remove, $db);

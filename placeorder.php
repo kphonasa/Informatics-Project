@@ -98,9 +98,9 @@ if (isset($_POST['submit']))
 	}
 		if (!$row['CARDNAME'])
 		{
-		header('Location: payment.php?D=' . $newdate . 'T=' . $ORDERTIME . '');exit;
+		header('Location: payment.php');exit;
 		}
-		else {header ('Location: process.php?D=' . $newdate . 'T=' . $ORDERTIME . '');exit;}
+		else {header ('Location: process2.php?');exit;}
 	}
 	}
 	
