@@ -46,7 +46,6 @@
 			$admin =$_POST['admin'];
 			
 			
-			print("Hello World");
 	
 			//connect to database
 			$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -55,7 +54,6 @@
 			$isComplete = true;
 			$errorMessage="";
 			
-			print("Hello World");
 	
 			if (!$storeid)
 			{
