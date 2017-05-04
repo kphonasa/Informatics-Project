@@ -29,8 +29,8 @@ $CID=$_GET['ID'];
 		<div class="col-xs-12">
 			<div id="container">
 			<form action = "browseC2.php?ID=<?php echo ($ID); ?>" method="post">
-			<input  type="text" name="name"> 
-	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
+			<!--<input  type="text" name="name"> 
+	<input  type="submit" class="btn btn-default" name="search" value="Search">-->
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
 		<option selected disabled hidden>Order By:</option>
 		<option value="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> AND PRODUCT.CATEGORYID=<?php echo ($CID); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
@@ -61,8 +61,8 @@ $CID=$_GET['ID'];
 
 		if (isset($_POST['order']))
 		{$query = $_POST['order'];}
-		else if (isset($_POST['search']))
-		{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
+		//else if (isset($_POST['search']))
+		//{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
 		else{$query ="SELECT PRODUCT.ID, PRODUCT.PNAME, PRODUCT.CATEGORYID, PRODUCT.IMAGE, PRODUCT.PRICE, CATEGORY.CNAME FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND CATEGORY.ID='" . $CID . "' ORDER BY PRODUCT.PNAME ASC;";}
 	
 		$result= queryDB($query, $db);
