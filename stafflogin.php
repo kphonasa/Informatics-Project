@@ -33,38 +33,31 @@
 <!--php--->
 <?php
 //Code to handle input form
-
 if (isset($_POST['submit']))
 {
 	//get data from form
 	$email=$_POST['email'];
 	$password=$_POST['password'];
 	
-
 	//connect to database
 	$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
-
 	//check for required fields
 	$isComplete=true;
 	$errorMessage="";
-
 	if(!$email)
 	{
 		$errorMessage .= "Please enter an email.";
 		$isComplete=false;
 	} else{$email=makeStringSafe($db,$email);}
-
 	if(!$password)
 	{
 		$errorMessage .="Please enter a password.";
 		$isComplete=false;
 	}
-
 	if(!$isComplete)
 	{
 		punt($errorMessage);
 	}
-
 	//get the hashed password from the user with the email that got entered
 	$query="SELECT STOREID,HASHEDPASS FROM STAFF WHERE EMAIL='" . $email . "';";
 	$result=queryDB($query, $db);
@@ -93,7 +86,6 @@ if (isset($_POST['submit']))
 	}
 	else{punt("This email is not in our system. <a href='stafflogin.php'> Try again</a>.");}
 	
-
 }
 ?>
 		</div>

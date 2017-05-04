@@ -1,6 +1,6 @@
 <?php
 /*
- * This php file enables users to edit a particular product
+ * This php file enables users to edit a particular pizza
  * It obtains the id for the pizza to update from an id variable passed using the GET method (in the url)
  *
  */
@@ -9,10 +9,6 @@
     session_start();
     if (!isset($_SESSION['EMAIL']))
     {
-        header('Location: stafflogin.php');
-        exit;
-    }
-	else if (!isset($_SESSION['STOREID'])) {
         header('Location: stafflogin.php');
         exit;
     }
@@ -26,15 +22,13 @@
         // get data from form
         $id = $_POST['ID'];
         if (!isset($id)) {
-            // if for some reason the id didn't post, kick them back to manageP.php
+            // if for some reason the id didn't post, kick them back to pizza.php
             header('Location: manageP.php');
             exit;
         }
-
         // get data from form
         $pname = $_POST['PNAME'];
         $description = $_POST['DESCRIPTION'];
-        $image=$_POST['IMAGE'];
         $price = $_POST['PRICE'];
         $qty = $_POST['QTY'];
         
@@ -59,44 +53,23 @@
             // if there's no error, then we need to update
             
             //
-            // first update product record
+            // first update pizza record
             //
-            // put together SQL statement to update product
+            // put together SQL statement to update pizza
             $query = "UPDATE PRODUCT SET PNAME='$pname', DESCRIPTION='$description', PRICE=$price WHERE ID=$id;";
             
             // connect to the database
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
             
             // run the update
-            $result = queryDB($query, $db);
-            
-             if ($_FILES['IMAGE']['size'] > 0) {
-            // if there is a picture
-            
-            // copy image to images directory
-                $tmpName = $_FILES['IMAGE']['tmp_name'];
-                $fileName = $_FILES['IMAGE']['name'];
-            
-                $newFileName = $imagesDir . $id . $fileName;
-            
-            // we create a filename that includes the product id, followed by the filename ($imagesDir comes from config.php)
-                if (move_uploaded_file($tmpName, $newFileName)) {
-                    // since we successfully copied the file, we now enter its filename in the product table
-                    $query = "UPDATE PRODUCT SET IMAGE = '$newFileName' WHERE id=$id;";
-            
-                    // run insert query
-                    queryDB($query, $db);
-            } else {
-                echo "error copying image";
-            }
-    	}
+            $result = queryDB($query, $db);            
                     
             //
             // now we need to update the toppings
             //
             
             
-            // now that we are done, send user back to product.php and exit 
+            // now that we are done, send user back to pizza.php and exit 
             header("Location: manageP.php?successmessage=Successfully updated");
             exit;
         }        
@@ -106,19 +79,19 @@
         //
     
         /*
-         * Check if a GET variable was passed with the id for the product
+         * Check if a GET variable was passed with the id for the pizza
          *
          */
          if(!isset($_GET['ID'])) {
             // if the id was not passed through the url
             
-            // send them out to manageP.php and stop executing code in this page
+            // send them out to pizza.php and stop executing code in this page
             header('Location: manageP.php');
             exit;
         }
         
         /*
-         * Now we'll check to make sure the id passed through the GET variable matches the id of a product in the database
+         * Now we'll check to make sure the id passed through the GET variable matches the id of a pizza in the database
          */
         
         // connect to the database
@@ -132,23 +105,22 @@
         // run the query
         $result = queryDB($query, $db);
         
-        // if the id is not in the product table, then we need to send the user back to pizza.php
+        // if the id is not in the pizza table, then we need to send the user back to pizza.php
         if (nTuples($result) == 0) {
-            // send them out to manageP.php and stop executing code in this page
+            // send them out to pizza.php and stop executing code in this page
             header('Location: manageP.php');
             exit;
         }
         
         /*
-         * Now we know we got a valid product id through the GET variable
+         * Now we know we got a valid pizza id through the GET variable
          */
         
-        // get data on product to fill out form with existing values
+        // get data on pizza to fill out form with existing values
         $row = nextTuple($result);
         
         $pname = $row['PNAME'];
         $description = $row['DESCRIPTION'];
-   
         $price = $row['PRICE'];
         $qty = $row['QTY'];
         
@@ -202,11 +174,11 @@
 
 
 
-<!-- form to update product -->
+<!-- form to update pizza -->
 <div class="row">
     <div class="col-xs-12">
         
-<form action="updateproduct.php" method="post" enctype="multipart/form-data">
+<form action="updateproduct.php" method="post">
 <!-- name -->
 <div class="form-group">
     <label for="PNAME">Product Name:</label>
@@ -228,14 +200,9 @@
     <input type="text" class="form-control" name="QTY" value="<?php if($qty) { echo $qty; } ?>"/>
 </div>
 
- <div class="form-group">
-    <label for="IMAGE">Picture of product</label>
-    <input type="file" style="width: 500" class="form-control" name="IMAGE"/>
-</div>
 
 
-
-<!-- hidden id (not visible to user, but need to be part of form submission so we know which product we are updating -->
+<!-- hidden id (not visible to user, but need to be part of form submission so we know which pizza we are updating -->
 <input type="hidden" name="ID" value="<?php echo $id; ?>"/>
 
 <button type="submit" class="btn btn-default" name="submit">Save</button>

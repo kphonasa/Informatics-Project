@@ -115,7 +115,7 @@ if (isset($_POST['submit']))
 		</div>
 	</div>
 <p>Set up an account <a href="inputUser.php"> here</a>.</p>
-<p>Continue as guest <a href="guesthome.php"> here</a>.</p>
+<p>Continue as guest <a href="selectSguest.php"> here</a>.</p>
 
 
 	</body>

@@ -30,7 +30,6 @@
             header('Location: manageC.php');
             exit;
         }
-
         // get data from form
         $cname = $_POST['CNAME'];        
         

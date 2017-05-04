@@ -12,57 +12,59 @@
 ?>
 <?php
 /*
- * This php file prompts users on whether they ship the order
+ * This php file prompts users on whether they want to delete a particular pizza
  * It obtains the id for the pizza to delete from an id variable passed using the GET method (in the url)
  *
  */
     include_once('config.php');
     include_once('dbutils.php');
     
-    
+    /*
+     * If the user just made a decision on a deletion by using the form below, we process that below
+     *
+     */
     if (isset($_POST['submit'])) {
-        // process the update (if selected) if the form below was submitted        
+        // process the deletion (if selected) if the form below was submitted        
         
         // get data from form
         $id = $_POST['id'];
         $delete = $_POST['ship'];
         
         if ($delete == 'yes') {
-            // if the user said yes to update, we need to update the order with id = $id
+            // if the user said yes to delete, we need to delete the pizza with id = $id
             
             // connect to the database
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
             
-            
+            // first delete any pizzatopping records that point to this pizza
             $query = "UPDATE ORDERS SET STATUS='Shipping' WHERE ID=$id AND STOREID='" . $_SESSION['STOREID'] . "';";
             
-            // run the update statement 
+            // run the delete statement to remove pizzatopping records that point to this pizza
             queryDB($query, $db);
             
            
         }
         
-        // send user back to manageD.php and exit 
+        // send user back to pizza.php and exit 
         header('Location: manageD.php');
         exit;
     }
     
     
-
     /*
-     * Check if a GET variable was passed with the id for the order
+     * Check if a GET variable was passed with the id for the pizza
      *
      */
     if(!isset($_GET['ID'])) {
         // if the id was not passed through the url
         
-        // send them out to manageD.php and stop executing code in this page
+        // send them out to pizza.php and stop executing code in this page
         header('Location: manageD.php');
         exit;
     }
     
     /*
-     * Now we'll check to make sure the id passed through the GET variable matches the id of a order in the database
+     * Now we'll check to make sure the id passed through the GET variable matches the id of a pizza in the database
      */
     
     // connect to the database
@@ -75,18 +77,18 @@
     // run the query
     $result = queryDB($query, $db);
     
-    // if the id is not in the order table, then we need to send the user back to manageD.php
+    // if the id is not in the pizza table, then we need to send the user back to pizza.php
     if (nTuples($result) == 0) {
-        // send them out to manageD.php and stop executing code in this page
+        // send them out to pizza.php and stop executing code in this page
         header('Location: manageD.php');
         exit;
     }
     
     /*
-     * Now we know we got a valid order id through the GET variable
+     * Now we know we got a valid pizza id through the GET variable
      */
     
-    // get some data from the order table to ask a better question when confirming deletion
+    // get some data from the pizza table to ask a better question when confirming deletion
     $row = nextTuple($result);
     
     $id = $row['ID'];    
@@ -117,7 +119,7 @@
     </div>
 </div>
 
-<!-- form to ask users to confim update -->
+<!-- form to ask users to confim deletion -->
 <div class="row">
     <div class="col-xs-12">
 <form action="ship.php" method="post">

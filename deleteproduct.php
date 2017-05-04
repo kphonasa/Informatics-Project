@@ -1,17 +1,3 @@
-<!--Manage Categories Staff-->
-<?php
-// this kicks users out if they are not logged in
-    session_start();
-    if (!isset($_SESSION['EMAIL'])) {
-        header('Location: stafflogin.php');
-        exit;
-    }
-	else if (!isset($_SESSION['STOREID'])) {
-        header('Location: stafflogin.php');
-        exit;
-    }
-?>
-
 <?php
 /*
  * This php file prompts users on whether they want to delete a particular pizza
@@ -33,41 +19,40 @@
         $delete = $_POST['delete'];
         
         if ($delete == 'yes') {
-            // if the user said yes to delete, we need to delete the category with id = $id
+            // if the user said yes to delete, we need to delete the pizza with id = $id
             
             // connect to the database
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
             
-            // query
+            // first delete any pizzatopping records that point to this pizza
             $query = "DELETE FROM PRODUCT WHERE ID=$id;";
             
-            // run 
+            // run the delete statement to remove pizzatopping records that point to this pizza
             queryDB($query, $db);
             
            
         }
         
-        // send user back 
+        // send user back to pizza.php and exit 
         header('Location: manageP.php');
         exit;
     }
     
     
-
     /*
-     * Check if a GET variable was passed with the id for the product
+     * Check if a GET variable was passed with the id for the pizza
      *
      */
     if(!isset($_GET['ID'])) {
         // if the id was not passed through the url
         
-        // send them out to manageP.php and stop executing code in this page
+        // send them out to pizza.php and stop executing code in this page
         header('Location: manageP.php');
         exit;
     }
     
     /*
-     * Now we'll check to make sure the id passed through the GET variable matches the id of a product in the database
+     * Now we'll check to make sure the id passed through the GET variable matches the id of a pizza in the database
      */
     
     // connect to the database
@@ -80,18 +65,18 @@
     // run the query
     $result = queryDB($query, $db);
     
-    // if the id is not in the product table, then we need to send the user back to pizza.php
+    // if the id is not in the pizza table, then we need to send the user back to pizza.php
     if (nTuples($result) == 0) {
-        // send them out to product.php and stop executing code in this page
+        // send them out to pizza.php and stop executing code in this page
         header('Location: manageP.php');
         exit;
     }
     
     /*
-     * Now we know we got a valid product id through the GET variable
+     * Now we know we got a valid pizza id through the GET variable
      */
     
-    // get some data from the product table to ask a better question when confirming deletion
+    // get some data from the pizza table to ask a better question when confirming deletion
     $row = nextTuple($result);
     
     $name = $row['PNAME'];    
@@ -118,7 +103,7 @@
 <!-- Visible title -->
 <div class="row">
     <div class="col-xs-12">
-        <h1>Do you want to delete the <?php echo $name; ?> </h1>
+        <h1>Do you want to delete the <?php echo $name; ?>?</h1>
     </div>
 </div>
 

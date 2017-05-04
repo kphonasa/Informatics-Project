@@ -43,7 +43,7 @@
 						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
 						
 						// set up a query to get infor on the cars from the DB
-						$query = "SELECT * FROM PRODUCT WHERE STOREID='" . $_SESSION['STORE'] . "' order by RAND() LIMIT 4;";
+						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 4';
 						
 						// run the query
 						$result = queryDB($query, $db);

@@ -172,7 +172,6 @@
 		//connect to the database
 		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
 		//Set up the query to get information on the cars from the database
-
 		
 		//run the query
 		if (isset($_POST['submit']))
