@@ -32,7 +32,7 @@ queryDB($query, $db);
 <form action = "browsePguest.php" method="post">
 	<input  type="text" name="name"> 
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
-	<select class="form-control" style=width: "200" name="order" data-default-value='<?php $query ?>'>
+	<select class="form-control" style="width: 200" name="order" data-default-value='<?php $query ?>'>
 			<option selected disabled hidden>Order By:</option>
 			<option value="SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
 			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
