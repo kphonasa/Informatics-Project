@@ -68,7 +68,7 @@
 								include_once('dbutils.php');
 								$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);											
 								// set up a query to get infor on the cars from the DB
-								$query = 'SELECT * FROM CATEGORY';											
+								$query = 'SELECT * FROM CATEGORY WHERE STOREID=' . $_SESSION['STORE'] . '';											
 										// run the query
 								$result = queryDB($query, $db);											
 								while($row = nextTuple($result))
