@@ -70,7 +70,7 @@ $PRICE=$row['PRICE'];
 </form>
 </div>
 <?php if (isset($_POST['back']))
-	{header('Location: browseC2.php?ID=' . $CID . '');
+	{header('Location: browseP.php');
 	exit;} 
 	if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
