@@ -57,11 +57,11 @@ queryDB($query, $db);
 		if (isset($_POST['order'])){
 			$query = $_POST['order'];
 		} else if (isset($_POST['search'])) {
-			$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE PNAME LIKE '%" . $_POST['name'] . "%';";
+			$query ="SELECT IMAGE, PNAME, ID, CNAME, PRICE FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.PNAME PNAME LIKE '%" . $_POST['name'] . "%';";
 		} else if (isset($_GET['CATEGORY'])) {
-			$query ="SELECT IMAGE,PNAME, ID, CATEGORY, PRICE FROM PRODUCT WHERE CATEGORY = '" . $_GET['CATEGORY'] . "';";
+			$query ="SELECT IMAGE, PNAME, ID, CATEGORY.CNAME, PRICE FROM PRODUCT, CATEGORY WHERE CATEGORY.CNAME = '" . $_GET['CATEGORY.CNAME'] . "';";
 		} else if (isset($_GET['CATEGORY'])) {
-			$query ="SELECT IMAGE,PNAME,CATEGORY, PRICE, ID FROM PRODUCT ORDER BY PNAME ASC;";
+			$query ="SELECT IMAGE, PRODUCT.PNAME, CATEGORY.CNAME, PRICE, ID FROM PRODUCT, CATEGORY ORDER BY PNAME ASC;";
 		}
 		
 		$result= queryDB($query, $db);
@@ -75,19 +75,19 @@ queryDB($query, $db);
 			if ($row['IMAGE'])
 			{$imagelocation=$row['IMAGE'];
 			$altText="product" . $row['PNAME'];
-			echo "<a href='Description.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
+			echo "<a href='Descriptionguest.php?ID=" . $row['ID'] . "'><img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
 			echo'</td>';
-			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+			echo "<td><a href='Descriptionguest.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 			echo '<td>' . $row['CATEGORY'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
-			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browsePguest.php?ID=" . $row['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
 			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
 			if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			
 			$_SESSION['QTY']=$QTY;
 			$_SESSION['ID']=$_GET['ID'];
-			header('Location: browseP2.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . '');
+			header('Location: browseP2guest.php?ID=' . $_SESSION['ID'] . 'QTY=' . $QTY . '');
 			exit;
 			}
 			
