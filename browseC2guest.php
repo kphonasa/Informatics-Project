@@ -23,7 +23,7 @@ $CID=$_GET['ID'];
 	<div class="col-xs-6">
 		<div class="col-xs-12">
 			<div id="container">
-			<form action = "browseC2.php?ID=<?php echo ($ID); ?>" method="post">
+			<form action = "browseC2guest.php?ID=<?php echo ($ID); ?>" method="post">
 			<input  type="text" name="name"> 
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>

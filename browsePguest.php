@@ -27,7 +27,7 @@
 		<div class="col-xs-12">
 			<div id="container">
 		
-<form action = "browseP.php" method="post">
+<form action = "browsePguest.php" method="post">
 	<input  type="text" name="name"> 
 	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
 	<select class="form-control" style="width: 200" name="order" data-default-value=<?php $query ?>>
