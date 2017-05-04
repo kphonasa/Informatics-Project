@@ -30,15 +30,18 @@
 $cookie_name = "user";
 $cookie_value = "John Doe";
 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-
-
 ?>
-	
 	
 </head>
 <body>
 	
 <?php
+	session_start();
+	if (!isset($_SESSION['STORE']))
+	{
+		header('Location: selectSguest.php');
+		exit;
+	}
 	include_once('config.php');
 	include_once('dbutils.php');
 ?>
@@ -61,7 +64,7 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1
 			<!--Menu-->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav nav-tabs">
-					<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php">Home</a></li>
+					<li <?php if($menuActive==0){echo 'class="active"';}?>><a href="guesthome.php"><?php echo $_SESSION['STORE']; ?></a></li>
 					<li <?php if($menuActive==1){echo 'class="active"';}?>><a href="browsePguest.php">Browse Products</a></li>
 					<li <?php if($menuActive==3){echo 'class="active"';}?>><a href="ordersguest.php">Orders</a></li>
 					<li <?php if($menuActive==4){echo 'class="active"';}?>><a href="shopperlogin.php">Log in</a></li>
@@ -74,12 +77,12 @@ setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1
 								include_once('dbutils.php');
 								$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);											
 								// set up a query to get infor on the cars from the DB
-								$query = 'SELECT DISTINCT CNAME FROM CATEGORY';											
+								$query = "SELECT * FROM CATEGORY WHERE STOREID='" . $_SESSION['STORE'] . "';";											
 										// run the query
 								$result = queryDB($query, $db);											
 								while($row = nextTuple($result))
 								{
-									echo "<li><a href='https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php?CATEGORY=" . $row['CNAME'] . "'>" . $row['CNAME'] . "</a></li>";	
+									echo "<li><a href='browseC2guest.php?ID=" . $row['ID'] . "'>" . $row['CNAME'] . "</a></li>";	
 								}
 							?>
 						</ul>
