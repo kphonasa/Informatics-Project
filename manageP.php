@@ -72,7 +72,7 @@
     
     
     //put together SQL to insert new record
-    $query="INSERT INTO PRODUCT(STOREID,PNAME,DESCRIPTION,CATEGORY,PRICE,QTY) VALUES ('" . $storeid . "','" . $pname . "','" . $description . "','" . $category . "','" . $price . "','" . $qty . "');";
+    $query="INSERT INTO PRODUCT(STOREID,CATEGORYID,PNAME,DESCRIPTION,PRICE,QTY) VALUES ('" . $storeid . "','" . $category . "','" . $pname . "','" . $description . "','" . $price . "','" . $qty . "');";
     
     //get a handle to database
      $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
@@ -83,7 +83,7 @@
 	$productid = mysqli_insert_id($db);
 	
 	// check if there's a picture
-	var_dump($_FILES['IMAGE']);
+	
         if ($_FILES['IMAGE']['size'] > 0) {
             // if there is a picture
             
@@ -93,9 +93,9 @@
             
             $newFileName = $imagesDir . $productid . $fileName;
             
-            // we create a filename that includes the pizza id, followed by the filename ($imagesDir comes from config.php)
+            // we create a filename that includes the product id, followed by the filename ($imagesDir comes from config.php)
             if (move_uploaded_file($tmpName, $newFileName)) {
-                // since we successfully copied the file, we now enter its filename in the pizza table
+                // since we successfully copied the file, we now enter its filename in the product table
                 $query = "UPDATE PRODUCT SET IMAGE = '$newFileName' WHERE id=$productid;";
             
                 // run insert query
@@ -138,9 +138,9 @@
 </div>
 
 
-<!--form to enter new cara-->
+<!--form to enter new product-->
 <div class="row">
-    <div class="col-xs-12">
+	<div class="col-xs-12">
 
 <form action="manageP.php" method="post" enctype="multipart/form-data">
 
@@ -154,7 +154,7 @@
 		$result= queryDB($query, $db);
 			
 		while($row = nextTuple($result))
-		{ echo'<option value=' . $row['CNAME'] . '>';echo($row['CNAME']); echo'</option>';}?>
+		{ echo'<option value=' . $row['ID'] . '>';echo($row['CNAME']); echo'</option>';}?>
 	</select>
     
 </div>
@@ -212,7 +212,7 @@
     
     $db= connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
     
-    $query= "SELECT ID,PNAME,DESCRIPTION,CATEGORY, PRICE, QTY, IMAGE FROM PRODUCT WHERE STOREID='" . $_SESSION['STOREID'] . "';";
+    $query= "SELECT CNAME,PRODUCT.ID,PNAME,DESCRIPTION, PRICE, QTY, IMAGE FROM PRODUCT,CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STOREID'] . "';";
     
     $result= queryDB($query,$db);
     
@@ -220,7 +220,7 @@
         echo "\n <tr>";
         echo "<td>" . $row['PNAME'] . "</td>";
         echo "<td>" . $row['DESCRIPTION'] . "</td>";
-		echo "<td>" . $row['CATEGORY'] . "</td>";
+		echo "<td>" . $row['CNAME'] . "</td>";
         echo "<td>" . $row['PRICE'] . "</td>";
         echo "<td>" . $row['QTY'] . "</td>";
 		echo "<td>";
