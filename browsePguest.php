@@ -1,177 +1,88 @@
-<!--shopper home-->
+<?php
+	session_start();
+	if (!isset($_SESSION['STORE']))
+	{
+		header('Location: selectSguest.php');
+		exit;
+	}
+?>
 <?php
 	include_once('config.php');
 	include_once('dbutils.php');
+	$title ="Products";
+	$h1 = "Products";
+	$menuActive=1;
+	include_once("guestheader.php");
 ?>
-<html>
-	<head>
-	<meta name="viewport" content="width=device-widthe, initial-scale-1.0">
-    
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<?php 
+$db=connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+$query = "CREATE TABLE IF NOT EXISTS TEMP(
+	ID INT NOT NULL AUTO_INCREMENT,
+	PNAME VARCHAR(128) NOT NULL,
+	PRODUCTID INT NOT NULL,
+	QTY INT NOT NULL,
+	PRICE INT NOT NULL,
+	PRIMARY KEY(ID));";
+queryDB($query, $db);
+?>
+	<div class="col-xs-12">
+		<div class="col-xs-12">
+			<div id="container">
+		
+<form action = "browsePguest.php" method="post">
+	<input  type="text" name="name"> 
+	<input  type="submit" class="btn btn-default" name="search" value="Search"> 
+	<select class="form-control" style=width: "200" name="order" data-default-value='<?php $query ?>'>
+			<option selected disabled hidden>Order By:</option>
+			<option value="SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME ASC;">A-Z</option>
+			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PNAME DESC;">Z-A</option>
+			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY CATEGORY.CNAME ASC;">Category</option>
+			<option value="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID=<?php echo($_SESSION['STORE']); ?> ORDER BY PRODUCT.PRICE;">Price</option>
+	</select><button type ="submit" class="btn btn-default" name="organize">Go</button>
+	<div>
+	</div>
+</form>
+	<table class='table table-hover'>
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<style>
-		body {
-			background-image: url("https://webdev.cs.uiowa.edu/~kwang9/project/image/FoodBackground.jpg");
-		}
-	</style>
-	
-	</head>
-	
-	<body>
-		
-		<div class="container">
-		<!--Container for all content to be displayed-->
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="page-header">
-					<!--Header-->		
-						<h1><b>Hvyee.com</b></font></h1>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		
-			<div class="jumbotron">
-				<div class="row">
-					<div class="col-sm-9 col-xs-12">
-						<h1>Welcome to Hvyee !</h1>
-						<p><a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/shopperlogin.php" role="button">Login</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php" role="button">Products</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/browseCguest.php" role="button">Categories</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/ordersguest.php" role="button">Orders</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/inputUser.php" role="button">Register</a>&nbsp;<a class="btn btn-primary btn-lg" href="https://webdev.cs.uiowa.edu/~kwang9/project/guestcart.php" role="button">Shopping Cart</a></p>
-					</div>	
-				</div>	
-			</div>
-		
-		
-<!-- thumbnail icons /-->
-		<div class="containter">			
-			<div class="row">
-				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				  </a>
-				</div>
+		<thead>
+			<th></th>
+			<th>Product</th>
+			<th>Category</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Add to Cart</th>
+		</thead>
+		<!--include config and util files-->
+		<?php
+		//connect to the database
+		$db = connectDB($DBHost,$DBUser,$DBPasswd,$DBName);
+		//run the query
+		if (isset($_POST['order']))
+		{$query = $_POST['order'];}
+		else if (isset($_POST['search']))
+		{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' AND PRODUCT.PNAME LIKE '%" . $_POST['name'] . "%';";}
+		else{$query ="SELECT *  FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND PRODUCT.STOREID='" . $_SESSION['STORE'] . "' ORDER BY PRODUCT.PNAME ASC;";}
+		$result= queryDB($query, $db);
 				
-				
-				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				  </a>
-				</div>
+		while($row = nextTuple($result))
+		{
+			echo'<tr>';
+			echo'<td>';
 			
-				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				  </a>
-				</div>
-
-				<div class="col-xs-6 col-md-3">
-					<a href="#" class="thumbnail">
-						<?php											/*
-						 *List all Productes that are in the DB
-						 *
-						 */    
-						// connect to the DB
-						$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
-						
-						// set up a query to get infor on the cars from the DB
-						$query = 'SELECT * FROM PRODUCT order by RAND() LIMIT 1';
-						
-						// run the query
-						$result = queryDB($query, $db);
-						
-						
-						while($row = nextTuple($result))
-							{
-								if ($row['IMAGE'])				
-								{$imagelocation=$row['IMAGE'];
-								$altText="product" . $row['PNAME'];
-								echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}
-								echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
-							}
-						?>
-				  </a>
-				</div>
-				
-			</div>	
-		</div>
-		
-	
-
-
-
+			if ($row['IMAGE'])
+			{$imagelocation=$row['IMAGE'];
+			$altText="product" . $row['PNAME'];
+			echo "<img src='$imagelocation' width='150' height='150' alt=$altText'>";}  
+			echo'</td>';
+			echo "<td><a href='Description.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
+			echo '<td>' . $row['CNAME'] . '</td>';
+			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
+			echo '<td>'; echo"Quantity"; echo"<form method='post' action='browsePguest.php?action=add&code='" . ['ID'] . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
+			echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
+			echo'</tr>';
+		}
+		?>
+	</table>
 <?php
 	include_once("footer.php");
 ?>
