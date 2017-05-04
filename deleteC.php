@@ -34,20 +34,21 @@
     
     
 	
-    $query="SELECT * FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND CATEGORY.ID='" . $id . "';";
+    $query="SELECT COUNT(*) FROM PRODUCT, CATEGORY WHERE CATEGORY.ID=PRODUCT.CATEGORYID AND CATEGORY.ID=$id;";
     $result=queryDB($query, $db);
-	if (nTuples($result) == 0) 
-	{$n=0;}
-	else {$n=1;}
+	$row=nextTuple($result);
+	$n=$row['COUNT(*)'];
+	var_dump($row);
 	
 	
     
     
     if($n>0){
-        header("Location: manageC.php?error=cannot delete");
+        header("Location: manageC.php?error=cann not delete");
         
         exit;   
     }
+
 	include_once('config.php');
     include_once('dbutils.php');
 	
@@ -66,7 +67,7 @@
             $db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);
             
             //query
-            $query = "DELETE FROM CATEGORY WHERE ID='" . $id . "';";
+            $query = "DELETE FROM CATEGORY WHERE ID=$id;";
             
             // run 
             queryDB($query, $db);
@@ -80,6 +81,7 @@
     }
     
     
+
     /*
      * Check if a GET variable was passed with the id for the pizza
      *
@@ -101,13 +103,14 @@
     
     // set up a query
     $id = $_GET['ID'];
-    $query = "SELECT * FROM CATEGORY WHERE ID='" . $id . "';";
+    $query = "SELECT * FROM CATEGORY WHERE ID=$id;";
     
     // run the query
     $result = queryDB($query, $db);
     
     // if the id is not in the Category table, then we need to send the user back to manageC.php
     if (nTuples($result) == 0) {
+        // send them out to pizza.php and stop executing code in this page
         header('Location: manageC.php');
         exit;
     }
