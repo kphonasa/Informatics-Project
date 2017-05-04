@@ -67,12 +67,12 @@
 								include_once('dbutils.php');
 								$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);											
 								// set up a query to get infor on the cars from the DB
-								$query = 'SELECT DISTINCT CATEGORY FROM PRODUCT';											
+								$query = 'SELECT DISTINCT CNAME FROM CATEGORY';											
 										// run the query
 								$result = queryDB($query, $db);											
 								while($row = nextTuple($result))
 								{
-									echo "<li><a href='https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php?CATEGORY=" . $row['CATEGORY'] . "'>" . $row['CATEGORY'] . "</a></li>";	
+									echo "<li><a href='https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php?CATEGORY=" . $row['CNAME'] . "'>" . $row['CNAME'] . "</a></li>";	
 								}
 							?>
 						</ul>
