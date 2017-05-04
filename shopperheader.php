@@ -13,11 +13,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 	
 	<style>
 		body {
@@ -68,12 +64,12 @@
 								include_once('dbutils.php');
 								$db = connectDB($DBHost, $DBUser, $DBPasswd, $DBName);											
 								// set up a query to get infor on the cars from the DB
-								$query = 'SELECT DISTINCT CATEGORY FROM PRODUCT';											
+								$query = 'SELECT DISTINCT CNAME FROM CATEGORY';											
 										// run the query
 								$result = queryDB($query, $db);											
 								while($row = nextTuple($result))
 								{
-									echo "<li><a href='https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php?CATEGORY=" . $row['CATEGORY'] . "'>" . $row['CATEGORY'] . "</a></li>";	
+									echo "<li><a href='https://webdev.cs.uiowa.edu/~kwang9/project/browsePguest.php?CATEGORY=" . $row['CNAME'] . "'>" . $row['CNAME'] . "</a></li>";	
 								}
 							?>
 						</ul>
