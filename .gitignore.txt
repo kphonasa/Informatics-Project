@@ -1,0 +1,10 @@
+.idea/*
+Informatics-Project/Guest-Pages/db.sh
+Informatics-Project/Guest-Pages/config.php
+Informatics-Project/Guest-Pages/dbutils.php
+Informatics-Project/Staff-Pages/db.sh
+Informatics-Project/Staff-Pages/config.php
+Informatics-Project/Staff-Pages/dbutils.php
+Informatics-Project/User-Pages/db.sh
+Informatics-Project/User-Pages/config.php
+Informatics-Project/User-Pages/dbutils.php
