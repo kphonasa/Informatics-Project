@@ -1,6 +1,5 @@
 <!--profile-->
 <?php
-//kicks users out if they are not logged in
 	session_start();
 	if (!isset($_SESSION['COOKIE']))
 	{
