@@ -1,5 +1,5 @@
 <?php
-//kicks users out if they are not logged in
+//Php page to grab the description of the grocery item from the database and display
 	session_start();
 	if (!isset($_SESSION['COOKIE']))
 	{
