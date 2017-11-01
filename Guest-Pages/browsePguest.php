@@ -1,6 +1,5 @@
 <!--browse products-->
 <?php
-//kicks users out if they are not logged in
 	session_start();
 	if (!isset($_SESSION['COOKIE']))
 	{
@@ -47,8 +46,6 @@
 			<th>Product</th>
 			<th>Category</th>
 			<th>Price</th>
-			<!--<th>Quantity</th>
-			<th>Add to Cart</th>-->
 		</thead>
 		<!--include config and util files-->
 		<?php
@@ -78,8 +75,6 @@
 			echo "<td><a href='Descriptionguest.php?ID=" . $row['ID'] . "'>" . $row['PNAME'] . "</a></td>";
 			echo '<td>' . $row['CNAME'] . '</td>';
 			echo '<td>'; echo"$"; echo $row['PRICE']; echo'</td>';
-			//echo '<td>'; echo"Quantity"; echo"<form method='post' action='browseP.php?ID=" . $row['ID'] . "QTY=" . $QTY . "'><input type='text' name='quantity' size='2'/>"; echo '</td>';
-			//echo '<td>'; echo"<button type ='submit' class='btn btn-default' name='Add'>Add to Cart</button></form>";echo'</td>';
 			if (isset($_POST['Add']))
 			{$QTY=$_POST['quantity'];
 			
